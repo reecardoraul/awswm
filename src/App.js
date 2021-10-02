@@ -17,7 +17,7 @@ function App() {
      return <Auth setUser={setUser} />
    }
 
-  return <Vols></Vols>
+  return <div className='app-wrapper'><Vols></Vols></div>
 }
 
 export default App;
