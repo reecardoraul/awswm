@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import './Shared.css';
 import axios from "axios";
 
 function reducer(state, action) {
@@ -64,26 +65,28 @@ export default function Vol({volunteer}) {
             {alert}
 
             <form onSubmit={saveVol}>
-                <TextField fullWidth required id="first_name" label="First Name" variant="outlined" value={display_vol.firstname}/>
-                <TextField fullWidth required id="last_name" label="Last Name" variant="outlined" value={display_vol.lastname}/>
-                {datePicker}
-                <TextField fullWidth required id="phone_primary" label="Cell Phone" variant="outlined" value={display_vol.phone_primary}/>
-                <TextField fullWidth id="phone_secondary" label="Other Phone" variant="outlined" value={display_vol.phone_secondary}/>
-                <TextField fullWidth required id="email" label="Email" variant="outlined" value={display_vol.phone_secondary}/>
+                <div class='form-div'>
+                    <div className='form-element'><TextField fullWidth required id="first_name" label="First Name" variant="outlined" value={display_vol.firstname}/></div>
+                    <div className='form-element'><TextField fullWidth required id="last_name" label="Last Name" variant="outlined" value={display_vol.lastname}/></div>
+                    {datePicker}
+                    <div className='form-element'><TextField fullWidth required id="phone_primary" label="Cell Phone" variant="outlined" value={display_vol.phone_primary}/></div>
+                    <div className='form-element'><TextField fullWidth id="phone_secondary" label="Other Phone" variant="outlined" value={display_vol.phone_secondary}/></div>
+                    <div className='form-element'><TextField fullWidth required id="email" label="Email" variant="outlined" value={display_vol.phone_secondary}/></div>
 
-                <div>
-                    <TextField fullWidth id="address" label="Address" variant="outlined" value={display_vol.address}/>
-                    <TextField fullWidth id="city" label="City" variant="outlined" value={display_vol.city}/>
-                    <TextField fullWidth id="state" label="State" variant="outlined" value={display_vol.state}/>
-                    <TextField fullWidth id="zip" label="Zip" variant="outlined" value={display_vol.zip}/>
-                </div>
-                <div>
-                    <TextField fullWidth id="occupation" label="Occupation" variant="outlined" value={display_vol.occupation}/>
-                    <TextField fullWidth id="how_heard_of" label="How did you hear about AWSWM" variant="outlined" value={display_vol.how_heard_of}/>
-                    <TextField fullWidth id="previous_years" label="Years with AWSWM" variant="outlined" value={display_vol.previous_years} inputProps={{inputMode:'numeric', pattern: '[0-9]*'}}/>
-                </div>
-                <div>
-                    <Button variant="contained" type="submit">Save</Button>
+                    <div>
+                        <div className='form-element'><TextField fullWidth id="address" label="Address" variant="outlined" value={display_vol.address}/></div>
+                        <div className='form-element'><TextField fullWidth id="city" label="City" variant="outlined" value={display_vol.city}/></div>
+                        <div className='form-element'><TextField fullWidth id="state" label="State" variant="outlined" value={display_vol.state}/></div>
+                        <div className='form-element'><TextField fullWidth id="zip" label="Zip" variant="outlined" value={display_vol.zip}/></div>
+                    </div>
+                    <div>
+                        <div className='form-element'><TextField fullWidth id="occupation" label="Occupation" variant="outlined" value={display_vol.occupation}/></div>
+                        <div className='form-element'><TextField fullWidth id="how_heard_of" label="How did you hear about AWSWM" variant="outlined" value={display_vol.how_heard_of}/></div>
+                        <div className='form-element'><TextField fullWidth id="previous_years" label="Years with AWSWM" variant="outlined" value={display_vol.previous_years} inputProps={{inputMode:'numeric', pattern: '[0-9]*'}}/></div>
+                    </div>
+                    <div>
+                        <Button variant="contained" type="submit">Save</Button>
+                    </div>
                 </div>
             </form>
         </div>
