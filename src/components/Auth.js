@@ -1,11 +1,6 @@
 import React, {useState, useReducer} from 'react';
 import PropTypes from 'prop-types';
 import './Auth.css'
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import axios from "axios";
 import Phone from './auth/Phone';
 import Verify from './auth/Verify';
 

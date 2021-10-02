@@ -1,12 +1,9 @@
 import React, {useState, useReducer, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import axios from "axios";
-import Phone from './auth/Phone';
-import Verify from './auth/Verify';
 import {IconButton, List, ListItem, ListItemText} from "@mui/material";
 
 function reducer(state, action) {
@@ -23,11 +20,11 @@ function reducer(state, action) {
 }
 
 async function setVols( dispatch, set_vols) {
+    dispatch({type: 'fetching'});
     axios.get('volunteers/')
         .catch(error => dispatch({type: 'error', error: error.message}))
         .then(data => {
             if (data != null) {
-                dispatch({type: 'fetching'});
                 set_vols(data.data);
             }else{
                 dispatch({type: 'error', error: "Unable to fetch volunteers!"})
@@ -35,16 +32,23 @@ async function setVols( dispatch, set_vols) {
         });
 }
 
-export default function Vols() {
+export default function Vols({setVolunteer}) {
     const initialState = {status: 'initial'};
     const [search, set_search] = useState();
     const [vols, set_vols] = useState([]);
     const [state, dispatch] = useReducer(reducer, initialState);
+    const history = useHistory();
 
-    useEffect(async () => {
-        if( vols.length == 0)
+    useEffect( () => {
+        if( vols && vols.length == 0)
             setVols(dispatch, set_vols)
-    });
+    },[]);
+
+    const handleClick = (vol) => {
+        console.log( "Vol Clicked " + vol.id);
+        setVolunteer(vol);
+        history.push("/volunteer");
+    }
 
     let alert;
     if( state.error ){
@@ -71,8 +75,9 @@ export default function Vols() {
             <List sx={{width: '100%'}}>
                 {display_vols.map((vol) => (
                     <ListItem
-                        key={vols.id}
+                        key={vol.id}
                         disableGutters
+                        onClick={ () => handleClick(vol)}
                         secondaryAction={
                             <IconButton>
                             </IconButton>
@@ -88,5 +93,5 @@ export default function Vols() {
 }
 
 Vols.propTypes = {
-
+    setVolunteer: PropTypes.func.isRequired
 }
