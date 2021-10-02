@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Checkbox from '@mui/material/Checkbox';
+import Select from '@mui/material/Select';
 import './Shared.css';
 import axios from "axios";
+import {MenuItem} from "@mui/material";
 
 function reducer(state, action) {
     switch (action.type) {
@@ -59,7 +62,7 @@ export default function Vol({volunteer}) {
     //datePicker = <MobileDatePicker required id='birthdate' label='Birthdate' value={volunteer.birthdate}/>
 
     return (
-        <div >
+        <div>
             <h3>Volunteer</h3>
 
             {alert}
@@ -71,7 +74,7 @@ export default function Vol({volunteer}) {
                     {datePicker}
                     <div className='form-element'><TextField fullWidth required id="phone_primary" label="Cell Phone" variant="outlined" value={display_vol.phone_primary}/></div>
                     <div className='form-element'><TextField fullWidth id="phone_secondary" label="Other Phone" variant="outlined" value={display_vol.phone_secondary}/></div>
-                    <div className='form-element'><TextField fullWidth required id="email" label="Email" variant="outlined" value={display_vol.phone_secondary}/></div>
+                    <div className='form-element'><TextField fullWidth required id="email" label="Email" variant="outlined" value={display_vol.email}/></div>
 
                     <div>
                         <div className='form-element'><TextField fullWidth id="address" label="Address" variant="outlined" value={display_vol.address}/></div>
@@ -81,8 +84,32 @@ export default function Vol({volunteer}) {
                     </div>
                     <div>
                         <div className='form-element'><TextField fullWidth id="occupation" label="Occupation" variant="outlined" value={display_vol.occupation}/></div>
-                        <div className='form-element'><TextField fullWidth id="how_heard_of" label="How did you hear about AWSWM" variant="outlined" value={display_vol.how_heard_of}/></div>
-                        <div className='form-element'><TextField fullWidth id="previous_years" label="Years with AWSWM" variant="outlined" value={display_vol.previous_years} inputProps={{inputMode:'numeric', pattern: '[0-9]*'}}/></div>
+                        <div className='form-element'><TextField fullWidth id="how_heard_of" label="How did you hear about us?" variant="outlined" value={display_vol.how_heard_of}/></div>
+                        <div className='form-element'><TextField fullWidth id="previous_years" label="Years with the program?" variant="outlined" value={display_vol.previous_years} inputProps={{inputMode:'numeric', pattern: '[0-9]*'}}/></div>
+                        <div className='form-element'>
+                            <Select id='skilevel' labelId='skilevel_label' label='Ski Proficiency' value={display_vol.skilevel}>
+                                <MenuItem value='advanced'>Advanced</MenuItem>
+                                <MenuItem value='intermediate'>Intermediate</MenuItem>
+                                <MenuItem value='beginner'>Beginner</MenuItem>
+                                <MenuItem value='non-skier'>Non-Skier</MenuItem>
+                            </Select>
+                        </div>
+                    </div>
+                    <div>
+                        Training Desired:
+                        <div className='form-element'>
+                            Sit Down <Checkbox id="training_sit" label="Sit Ski" value={display_vol.training_sit}/>
+                            Standup<Checkbox id="training_stand" label="Standup" value={display_vol.training_stand}/></div>
+                        <div className='form-element'>Comfortable taking athlete on chairlfit?<Checkbox id="can_chair" label="Comfortable taking athelete on chairlift?" value={display_vol.can_chair}/></div>
+                    </div>
+
+                    <div>
+                        Tuesday 6-8p<Checkbox id="tuesday" label="Tuesday 6-8p" value={display_vol.tuesday}>Tuesday 6-8p</Checkbox>
+                        Wednesday 6-8p<Checkbox id="wednesday" label="Wednesday 6-8p" value={display_vol.wednesday}>Wednesday 6-8p</Checkbox>
+                        Thursday 6-8p<Checkbox id="thursday" label="Thursday 6-8p" value={display_vol.thursday}>Thursday 6-8p</Checkbox>
+                        Sunday 1-3p<Checkbox id="sunday1" label="Sunday 1-3p" value={display_vol.sunday1}>Sunday 1-3p</Checkbox>
+                        Sunday 2-4p<Checkbox id="sunday2" label="Sunday 2-4p" value={display_vol.sunday2}>Sunday 2-4p</Checkbox>
+                        Sunday 3-5p<Checkbox id="sunday3" label="Sunday 3-5p" value={display_vol.sunday3}>Sunday 3-5p</Checkbox>
                     </div>
                     <div>
                         <Button variant="contained" type="submit">Save</Button>
