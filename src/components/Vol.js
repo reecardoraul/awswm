@@ -16,9 +16,9 @@ function reducer(state, action) {
         case 'saving':
             return {error: null, info: null, spinner: true};
         case 'error':
-            return {error: action.error, info: null, spinner:false};
+            return {error: action.error, info: null, spinner: false};
         case 'saved':
-            return {error: action.error, info: "Saved", spinner:false};
+            return {error: action.error, info: "Saved", spinner: false};
         default:
             throw new Error();
     }
@@ -50,11 +50,11 @@ export default function Vol({volunteer}) {
     let display_vol = volunteer ? volunteer : vol;
 
     let alert;
-    if( state.error ){
+    if (state.error) {
         alert = <Alert severity="error">{state.error}</Alert>
-    }else if (state.info ) {
+    } else if (state.info) {
         <Alert severity="info">{state.info}</Alert>
-    }else{
+    } else {
         alert = <span></span>
     }
 
@@ -69,25 +69,46 @@ export default function Vol({volunteer}) {
 
             <form onSubmit={saveVol}>
                 <div class='form-div'>
-                    <div className='form-element'><TextField fullWidth required id="first_name" label="First Name" variant="outlined" value={display_vol.firstname}/></div>
-                    <div className='form-element'><TextField fullWidth required id="last_name" label="Last Name" variant="outlined" value={display_vol.lastname}/></div>
+                    <div className='form-element'><TextField fullWidth required id="first_name" label="First Name"
+                                                             variant="outlined" value={display_vol.firstname}/></div>
+                    <div className='form-element'><TextField fullWidth required id="last_name" label="Last Name"
+                                                             variant="outlined" value={display_vol.lastname}/></div>
                     {datePicker}
-                    <div className='form-element'><TextField fullWidth required id="phone_primary" label="Cell Phone" variant="outlined" value={display_vol.phone_primary}/></div>
-                    <div className='form-element'><TextField fullWidth id="phone_secondary" label="Other Phone" variant="outlined" value={display_vol.phone_secondary}/></div>
-                    <div className='form-element'><TextField fullWidth required id="email" label="Email" variant="outlined" value={display_vol.email}/></div>
+                    <div className='form-element'><TextField fullWidth required id="phone_primary" label="Cell Phone"
+                                                             variant="outlined" value={display_vol.phone_primary}/>
+                    </div>
+                    <div className='form-element'><TextField fullWidth id="phone_secondary" label="Other Phone"
+                                                             variant="outlined" value={display_vol.phone_secondary}/>
+                    </div>
+                    <div className='form-element'><TextField fullWidth required id="email" label="Email"
+                                                             variant="outlined" value={display_vol.email}/></div>
 
                     <div>
-                        <div className='form-element'><TextField fullWidth id="address" label="Address" variant="outlined" value={display_vol.address}/></div>
-                        <div className='form-element'><TextField fullWidth id="city" label="City" variant="outlined" value={display_vol.city}/></div>
-                        <div className='form-element'><TextField fullWidth id="state" label="State" variant="outlined" value={display_vol.state}/></div>
-                        <div className='form-element'><TextField fullWidth id="zip" label="Zip" variant="outlined" value={display_vol.zip}/></div>
+                        <div className='form-element'><TextField fullWidth id="address" label="Address"
+                                                                 variant="outlined" value={display_vol.address}/></div>
+                        <div className='form-element'><TextField fullWidth id="city" label="City" variant="outlined"
+                                                                 value={display_vol.city}/></div>
+                        <div className='form-element'><TextField fullWidth id="state" label="State" variant="outlined"
+                                                                 value={display_vol.state}/></div>
+                        <div className='form-element'><TextField fullWidth id="zip" label="Zip" variant="outlined"
+                                                                 value={display_vol.zip}/></div>
                     </div>
                     <div>
-                        <div className='form-element'><TextField fullWidth id="occupation" label="Occupation" variant="outlined" value={display_vol.occupation}/></div>
-                        <div className='form-element'><TextField fullWidth id="how_heard_of" label="How did you hear about us?" variant="outlined" value={display_vol.how_heard_of}/></div>
-                        <div className='form-element'><TextField fullWidth id="previous_years" label="Years with the program?" variant="outlined" value={display_vol.previous_years} inputProps={{inputMode:'numeric', pattern: '[0-9]*'}}/></div>
+                        <div className='form-element'><TextField fullWidth id="occupation" label="Occupation"
+                                                                 variant="outlined" value={display_vol.occupation}/>
+                        </div>
+                        <div className='form-element'><TextField fullWidth id="how_heard_of"
+                                                                 label="How did you hear about us?" variant="outlined"
+                                                                 value={display_vol.how_heard_of}/></div>
+                        <div className='form-element'><TextField fullWidth id="previous_years"
+                                                                 label="Years with the program?" variant="outlined"
+                                                                 value={display_vol.previous_years} inputProps={{
+                            inputMode: 'numeric',
+                            pattern: '[0-9]*'
+                        }}/></div>
                         <div className='form-element'>
-                            <Select id='skilevel' labelId='skilevel_label' label='Ski Proficiency' value={display_vol.skilevel}>
+                            <Select id='skilevel' labelId='skilevel_label' label='Ski Proficiency'
+                                    value={display_vol.skilevel}>
                                 <MenuItem value='advanced'>Advanced</MenuItem>
                                 <MenuItem value='intermediate'>Intermediate</MenuItem>
                                 <MenuItem value='beginner'>Beginner</MenuItem>
@@ -95,21 +116,31 @@ export default function Vol({volunteer}) {
                             </Select>
                         </div>
                     </div>
-                    <div>
-                        Training Desired:
-                        <div className='form-element'>
-                            Sit Down <Checkbox id="training_sit" label="Sit Ski" value={display_vol.training_sit}/>
-                            Standup<Checkbox id="training_stand" label="Standup" value={display_vol.training_stand}/></div>
-                        <div className='form-element'>Comfortable taking athlete on chairlfit?<Checkbox id="can_chair" label="Comfortable taking athelete on chairlift?" value={display_vol.can_chair}/></div>
+                    <div className="section">
+                        <b>Training Desired:</b><br/>
+                        Sit Down <Checkbox id="training_sit" label="Sit Ski" value={display_vol.training_sit}/>
+                        Standup<Checkbox id="training_stand" label="Standup" value={display_vol.training_stand}/>
+                        <div className='form-element'>Comfortable taking athlete on chairlfit?
+                            <Checkbox id="can_chair"
+                                label="Comfortable taking athelete on chairlift?"
+                                value={display_vol.can_chair}>Comfortable w/ athlete on chairlift?</Checkbox>
+                        </div>
                     </div>
 
-                    <div>
-                        Tuesday 6-8p<Checkbox id="tuesday" label="Tuesday 6-8p" value={display_vol.tuesday}>Tuesday 6-8p</Checkbox>
-                        Wednesday 6-8p<Checkbox id="wednesday" label="Wednesday 6-8p" value={display_vol.wednesday}>Wednesday 6-8p</Checkbox>
-                        Thursday 6-8p<Checkbox id="thursday" label="Thursday 6-8p" value={display_vol.thursday}>Thursday 6-8p</Checkbox>
-                        Sunday 1-3p<Checkbox id="sunday1" label="Sunday 1-3p" value={display_vol.sunday1}>Sunday 1-3p</Checkbox>
-                        Sunday 2-4p<Checkbox id="sunday2" label="Sunday 2-4p" value={display_vol.sunday2}>Sunday 2-4p</Checkbox>
-                        Sunday 3-5p<Checkbox id="sunday3" label="Sunday 3-5p" value={display_vol.sunday3}>Sunday 3-5p</Checkbox>
+                    <div className="section">
+                        <b>Availability</b><br/>
+                        Tuesday 6-8p<Checkbox id="tuesday" label="Tuesday 6-8p" value={display_vol.tuesday}>Tuesday
+                        6-8p</Checkbox>
+                        Wednesday 6-8p<Checkbox id="wednesday" label="Wednesday 6-8p" value={display_vol.wednesday}>Wednesday
+                        6-8p</Checkbox>
+                        Thursday 6-8p<Checkbox id="thursday" label="Thursday 6-8p" value={display_vol.thursday}>Thursday
+                        6-8p</Checkbox>
+                        Sunday 1-3p<Checkbox id="sunday1" label="Sunday 1-3p" value={display_vol.sunday1}>Sunday
+                        1-3p</Checkbox>
+                        Sunday 2-4p<Checkbox id="sunday2" label="Sunday 2-4p" value={display_vol.sunday2}>Sunday
+                        2-4p</Checkbox>
+                        Sunday 3-5p<Checkbox id="sunday3" label="Sunday 3-5p" value={display_vol.sunday3}>Sunday
+                        3-5p</Checkbox>
                     </div>
                     <div>
                         <Button variant="contained" type="submit">Save</Button>
@@ -117,7 +148,7 @@ export default function Vol({volunteer}) {
                 </div>
             </form>
         </div>
-    );
+);
 
 }
 
