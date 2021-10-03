@@ -68,7 +68,7 @@ export default function PeepLister({setPeep, nextPath, fetchUrl, icon, label}) {
 
     return (
         <div >
-            <Typography variant="h6" > {label ? label : "People"}</Typography>
+            <Typography variant='caption' sx={{ fontSize: 24 }} color="text.secondary" gutterBottom>{label ? label : "People"}</Typography>
             <div className="form-div">
                 <TextField autoFocus label="Search" variant="outlined" onChange={e => set_search(e.target.value)}/>
             </div>
