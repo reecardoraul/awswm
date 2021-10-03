@@ -4,6 +4,7 @@ import '../Auth.css'
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 
 function reducer(state, action) {
@@ -57,7 +58,7 @@ export default function Phone({setPhone}) {
                     <TextField autoFocus id="phone_number" label="Phone Number" variant="outlined" onChange={e => setText(e.target.value)}/>
                     <br/>
                     <div className="centered">
-                        <Button variant="contained" type="submit">Authenticate</Button>
+                        <Button disabled={state.spinner} variant="contained" type="submit">authenticate</Button>
                     </div>
                 </form>
             </div>

@@ -54,8 +54,8 @@ export default function Verify({setUserId, phoneNumber}) {
                 <form onSubmit={submitPhoneNumber}>
                     <TextField autoFocus id="ott" label="Verification Code" variant="outlined" onChange={e => setText(e.target.value)}/>
                     <br/>
-                    <div>
-                        <Button variant="contained" type="submit">Verify</Button>
+                    <div className="centered">
+                        <Button disabled={state.spinner} variant="contained" type="submit">Verify</Button>
                     </div>
                 </form>
             </div>

@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import axios from "axios";
 import Auth from "./components/Auth";
 import config from "./config.json";
-import Vols from "./components/Vols";
+import PeepLister from "./components/PeepLister";
 import Vol from "./components/Vol";
 import DownhillSkiingIcon from '@mui/icons-material/DownhillSkiing';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
@@ -25,10 +25,14 @@ axios.defaults.withCredentials=true;
 function App() {
   const [user, setUser] = useState();
   const [volunteer, setVolunteer] = useState({});
+  const [athlete, setAthlete] = useState({});
 
   if(!user) {
      return <Auth setUser={setUser} />
    }
+
+  let volunteerIcon = <VolunteerActivismIcon/>;
+  let athleteIcon = <DownhillSkiingIcon/>;
 
   return <Router>
           <div>
@@ -43,16 +47,17 @@ function App() {
             <Switch>
                 <div className='content'>
                     <Route path="/volunteers">
-                        <Vols setVolunteer={setVolunteer}></Vols>
+                        <PeepLister fetchUrl='/volunteers' nextPath='volunteer' setPeep={setVolunteer} label="Volunteers" icon={volunteerIcon}/>
                     </Route>
                     <Route path="/athletes">
-
+                        <PeepLister fetchUrl='/students' nextPath='athlete' setPeep={setAthlete} label="Athletes" icon={athleteIcon}/>
                     </Route>
                     <Route path="/settings">
-
                     </Route>
                     <Route path="/volunteer">
                         <Vol volunteer={volunteer}></Vol>
+                    </Route>
+                    <Route path="/athlete">
                     </Route>
                 </div>
             </Switch>
