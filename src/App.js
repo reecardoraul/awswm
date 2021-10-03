@@ -5,6 +5,7 @@ import Auth from "./components/Auth";
 import config from "./config.json";
 import PeepLister from "./components/PeepLister";
 import Vol from "./components/Vol";
+import Athlete from "./components/Athlete";
 import DownhillSkiingIcon from '@mui/icons-material/DownhillSkiing';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -55,9 +56,10 @@ function App() {
                     <Route path="/settings">
                     </Route>
                     <Route path="/volunteer">
-                        <Vol volunteer={volunteer}></Vol>
+                        <Vol volunteer={volunteer}/>
                     </Route>
                     <Route path="/athlete">
+                        <Athlete athlete={athlete}/>
                     </Route>
                 </div>
             </Switch>
