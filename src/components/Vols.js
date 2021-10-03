@@ -45,7 +45,6 @@ export default function Vols({setVolunteer}) {
     },[]);
 
     const handleClick = (vol) => {
-        console.log( "Vol Clicked " + vol.id);
         setVolunteer(vol);
         history.push("/volunteer");
     }

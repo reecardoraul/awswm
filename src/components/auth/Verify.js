@@ -52,7 +52,7 @@ export default function Verify({setUserId, phoneNumber}) {
             {alert}
             <div className="form-div">
                 <form onSubmit={submitPhoneNumber}>
-                    <TextField id="ott" label="Verification Code" variant="outlined" onChange={e => setText(e.target.value)}/>
+                    <TextField autoFocus id="ott" label="Verification Code" variant="outlined" onChange={e => setText(e.target.value)}/>
                     <br/>
                     <div>
                         <Button variant="contained" type="submit">Verify</Button>
@@ -65,5 +65,5 @@ export default function Verify({setUserId, phoneNumber}) {
 
 Verify.propTypes = {
     setUserId: PropTypes.func.isRequired,
-    phoneNumber: PropTypes.func.isRequired
+    phoneNumber: PropTypes.string.isRequired
 }

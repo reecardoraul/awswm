@@ -8,6 +8,7 @@ import Select from '@mui/material/Select';
 import './Shared.css';
 import axios from "axios";
 import {MenuItem} from "@mui/material";
+import {Card, CardHeader, CardContent, Typography} from "@mui/material";
 
 function reducer(state, action) {
     switch (action.type) {
@@ -116,8 +117,8 @@ export default function Vol({volunteer}) {
                             </Select>
                         </div>
                     </div>
-                    <div className="section">
-                        <b>Training Desired:</b><br/>
+                    <Card variant="outlined">
+                        <Typography sx={{fontSize: 14}} color="text.secondary">Training Desired:</Typography>
                         Sit Down <Checkbox id="training_sit" label="Sit Ski" value={display_vol.training_sit}/>
                         Standup<Checkbox id="training_stand" label="Standup" value={display_vol.training_stand}/>
                         <div className='form-element'>Comfortable taking athlete on chairlfit?
@@ -125,7 +126,7 @@ export default function Vol({volunteer}) {
                                 label="Comfortable taking athelete on chairlift?"
                                 value={display_vol.can_chair}>Comfortable w/ athlete on chairlift?</Checkbox>
                         </div>
-                    </div>
+                    </Card>
 
                     <div className="section">
                         <b>Availability</b><br/>

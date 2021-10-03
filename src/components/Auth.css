@@ -5,6 +5,10 @@
     justify-content: center;
 }
 
+.centered{
+    margin: 0 auto;
+}
+
 .form-div{
     padding-top: 5px;
 }

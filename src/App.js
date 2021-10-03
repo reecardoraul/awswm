@@ -32,14 +32,14 @@ function App() {
 
   return <Router>
           <div>
-              <div className='App-header'>
+              <header className='App-header'>
+                  <div>
                 AWSWM Admin
-                <nav>
-                    <Link to='/volunteers'><IconButton><VolunteerActivismIcon/></IconButton></Link>
-                    <Link to='/athletes'><IconButton><DownhillSkiingIcon/></IconButton></Link>
-                    <Link to='/settings'><IconButton><SettingsIcon/></IconButton></Link>
-                </nav>
-            </div>
+                    <Link to='/volunteers'><IconButton><VolunteerActivismIcon style={{fill:"white"}}/></IconButton></Link>
+                    <Link to='/athletes'><IconButton><DownhillSkiingIcon style={{fill:"white"}}/></IconButton></Link>
+                    <Link to='/settings'><IconButton><SettingsIcon style={{fill:"white"}}/></IconButton></Link>
+                  </div>
+              </header>
             <Switch>
                 <div className='content'>
                     <Route path="/volunteers">

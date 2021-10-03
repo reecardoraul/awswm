@@ -1,4 +1,4 @@
-import React, {useState, useReducer} from 'react';
+import React, {useState, useReducer, useRef, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import '../Auth.css'
 import Alert from '@mui/material/Alert';
@@ -54,9 +54,9 @@ export default function Phone({setPhone}) {
             {alert}
             <div className="form-div">
                 <form onSubmit={submitPhoneNumber}>
-                    <TextField id="phone_number" label="Phone Number" variant="outlined" onChange={e => setText(e.target.value)}/>
+                    <TextField autoFocus id="phone_number" label="Phone Number" variant="outlined" onChange={e => setText(e.target.value)}/>
                     <br/>
-                    <div>
+                    <div className="centered">
                         <Button variant="contained" type="submit">Authenticate</Button>
                     </div>
                 </form>
