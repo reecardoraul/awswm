@@ -7,8 +7,9 @@ import Checkbox from '@mui/material/Checkbox';
 import Select from '@mui/material/Select';
 import './Shared.css';
 import axios from "axios";
-import {MenuItem} from "@mui/material";
+import {Avatar, MenuItem} from "@mui/material";
 import {Card, CardHeader, CardContent, Typography} from "@mui/material";
+import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 
 function reducer(state, action) {
     switch (action.type) {
@@ -64,12 +65,15 @@ export default function Vol({volunteer}) {
 
     return (
         <div>
-            <h3>Volunteer</h3>
+            <Typography variant='caption' sx={{ fontSize: 24 }} color="text.secondary" gutterBottom>Volunteer</Typography>
+            <div className='right'>
+                <Avatar><VolunteerActivismIcon/></Avatar>
+            </div>
 
             {alert}
 
             <form onSubmit={saveVol}>
-                <div class='form-div'>
+                <div className='form-div'>
                     <div className='form-element'><TextField fullWidth required id="first_name" label="First Name"
                                                              variant="outlined" value={display_vol.firstname}/></div>
                     <div className='form-element'><TextField fullWidth required id="last_name" label="Last Name"
@@ -79,31 +83,31 @@ export default function Vol({volunteer}) {
                                                              variant="outlined" value={display_vol.phone_primary}/>
                     </div>
                     <div className='form-element'><TextField fullWidth id="phone_secondary" label="Other Phone"
-                                                             variant="outlined" value={display_vol.phone_secondary}/>
+                                                             variant="outlined" value={display_vol.phone_secondary || ''}/>
                     </div>
                     <div className='form-element'><TextField fullWidth required id="email" label="Email"
                                                              variant="outlined" value={display_vol.email}/></div>
 
                     <div>
                         <div className='form-element'><TextField fullWidth id="address" label="Address"
-                                                                 variant="outlined" value={display_vol.address}/></div>
+                                                                 variant="outlined" value={display_vol.address || ''}/></div>
                         <div className='form-element'><TextField fullWidth id="city" label="City" variant="outlined"
-                                                                 value={display_vol.city}/></div>
+                                                                 value={display_vol.city || ''}/></div>
                         <div className='form-element'><TextField fullWidth id="state" label="State" variant="outlined"
-                                                                 value={display_vol.state}/></div>
+                                                                 value={display_vol.state || ''}/></div>
                         <div className='form-element'><TextField fullWidth id="zip" label="Zip" variant="outlined"
-                                                                 value={display_vol.zip}/></div>
+                                                                 value={display_vol.zip || ''}/></div>
                     </div>
                     <div>
                         <div className='form-element'><TextField fullWidth id="occupation" label="Occupation"
-                                                                 variant="outlined" value={display_vol.occupation}/>
+                                                                 variant="outlined" value={display_vol.occupation || ''}/>
                         </div>
                         <div className='form-element'><TextField fullWidth id="how_heard_of"
                                                                  label="How did you hear about us?" variant="outlined"
-                                                                 value={display_vol.how_heard_of}/></div>
+                                                                 value={display_vol.how_heard_of || ''}/></div>
                         <div className='form-element'><TextField fullWidth id="previous_years"
                                                                  label="Years with the program?" variant="outlined"
-                                                                 value={display_vol.previous_years} inputProps={{
+                                                                 value={display_vol.previous_years || ''} inputProps={{
                             inputMode: 'numeric',
                             pattern: '[0-9]*'
                         }}/></div>

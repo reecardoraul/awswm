@@ -7,3 +7,12 @@
     padding: 5px;
     margin: 2px;
 }
+
+.right{
+    float: right;
+    padding-right: 5px;
+}
+
+.form-div{
+    padding-top: 3px;
+}
