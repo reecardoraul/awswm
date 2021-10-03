@@ -5,6 +5,11 @@ import Auth from "./components/Auth";
 import config from "./config.json";
 import Vols from "./components/Vols";
 import Vol from "./components/Vol";
+import DownhillSkiingIcon from '@mui/icons-material/DownhillSkiing';
+import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
+import SettingsIcon from '@mui/icons-material/Settings';
+import IconButton from "@mui/material/IconButton";
+
 import {
     BrowserRouter as Router,
         Switch,
@@ -25,35 +30,34 @@ function App() {
      return <Auth setUser={setUser} />
    }
 
-  return <div className='app-wrapper'>
-      <Router>
+  return <Router>
           <div>
-            <nav>
-                <ul>
-                  <li><Link to='/volunteers'>Volunteers</Link></li>
-                  <li><Link to='/athletes'>Athletes</Link></li>
-                  <li><Link to='/settings'>Settings</Link></li>
-                </ul>
-            </nav>
+              <div className='App-header'>
+                AWSWM Admin
+                <nav>
+                    <Link to='/volunteers'><IconButton><VolunteerActivismIcon/></IconButton></Link>
+                    <Link to='/athletes'><IconButton><DownhillSkiingIcon/></IconButton></Link>
+                    <Link to='/settings'><IconButton><SettingsIcon/></IconButton></Link>
+                </nav>
+            </div>
             <Switch>
-                <Route path="/volunteers">
-                    <Vols setVolunteer={setVolunteer}></Vols>
-                </Route>
-                <Route path="/athletes">
+                <div className='content'>
+                    <Route path="/volunteers">
+                        <Vols setVolunteer={setVolunteer}></Vols>
+                    </Route>
+                    <Route path="/athletes">
 
-                </Route>
-                <Route path="/settings">
+                    </Route>
+                    <Route path="/settings">
 
-                </Route>
-                <Route path="/volunteer">
-                    <Vol volunteer={volunteer}></Vol>
-                </Route>
+                    </Route>
+                    <Route path="/volunteer">
+                        <Vol volunteer={volunteer}></Vol>
+                    </Route>
+                </div>
             </Switch>
           </div>
       </Router>
-
-
-  </div>
 }
 
 export default App;
