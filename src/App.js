@@ -6,6 +6,7 @@ import config from "./config.json";
 import PeepLister from "./components/PeepLister";
 import Vol from "./components/Vol";
 import Athlete from "./components/Athlete";
+import Home from "./components/Home";
 import DownhillSkiingIcon from '@mui/icons-material/DownhillSkiing';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -47,19 +48,20 @@ function App() {
               </header>
             <Switch>
                 <div className='content'>
-                    <Route path="/volunteers">
+                    <Route exact path="/volunteers">
                         <PeepLister fetchUrl='/volunteers' nextPath='volunteer' setPeep={setVolunteer} label="Volunteers" icon={volunteerIcon}/>
                     </Route>
-                    <Route path="/athletes">
+                    <Route exact path="/athletes">
                         <PeepLister fetchUrl='/students' nextPath='athlete' setPeep={setAthlete} label="Athletes" icon={athleteIcon}/>
                     </Route>
-                    <Route path="/settings">
-                    </Route>
-                    <Route path="/volunteer">
+                    <Route exact path="/volunteer">
                         <Vol volunteer={volunteer}/>
                     </Route>
-                    <Route path="/athlete">
+                    <Route exact path="/athlete">
                         <Athlete athlete={athlete}/>
+                    </Route>
+                    <Route exact path="/">
+                        <Home/>
                     </Route>
                 </div>
             </Switch>
