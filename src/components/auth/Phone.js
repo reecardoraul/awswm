@@ -1,10 +1,9 @@
-import React, {useState, useReducer, useRef, useEffect} from 'react';
+import React, {useState, useReducer} from 'react';
 import PropTypes from 'prop-types';
 import '../Auth.css'
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 
 function reducer(state, action) {
@@ -64,7 +63,6 @@ export default function Phone({setPhone}) {
             </div>
         </div>
     );
-
 }
 
 Phone.propTypes = {

@@ -7,8 +7,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Select from '@mui/material/Select';
 import './Shared.css';
 import axios from "axios";
-import {Avatar, MenuItem} from "@mui/material";
-import {Card, CardHeader, CardContent, Typography} from "@mui/material";
+import {Avatar, MenuItem, Card, Typography} from "@mui/material";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 
 function reducer(state, action) {
@@ -134,7 +133,8 @@ export default function Vol({volunteer}) {
 
                     <div className="section">
                         <b>Availability</b><br/>
-                        Tuesday 6-8p<Checkbox id="tuesday" label="Tuesday 6-8p" value={display_vol.tuesday}>Tuesday
+                        TUE<Checkbox id="tuesday" label="Tuesday 6-8p" value={display_vol.tuesday}>T
+                        uesday
                         6-8p</Checkbox>
                         Wednesday 6-8p<Checkbox id="wednesday" label="Wednesday 6-8p" value={display_vol.wednesday}>Wednesday
                         6-8p</Checkbox>

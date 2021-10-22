@@ -7,6 +7,7 @@ import axios from "axios";
 import {Avatar, IconButton, ImageListItem, List, ListItem, ListItemText} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
+import './PeepLister.css';
 
 function reducer(state, action) {
     switch (action.type) {
@@ -42,9 +43,9 @@ export default function PeepLister({setPeep, nextPath, fetchUrl, icon, label}) {
     const history = useHistory();
 
     useEffect( () => {
-        if( peeps && peeps.length == 0)
+        if( peeps && peeps.length === 0)
             setPeeps(dispatch, set_peeps, fetchUrl)
-    },[]);
+    },[fetchUrl,peeps]);
 
     const handleClick = (vol) => {
         setPeep(vol);
@@ -75,10 +76,12 @@ export default function PeepLister({setPeep, nextPath, fetchUrl, icon, label}) {
             {alert}
             <List sx={{width: '100%'}}>
                 {displayPeeps.map((peep) => (
+
                     <ListItem
                         key={peep.id}
                         disableGutters
                         onClick={ () => handleClick(peep)}
+                        className={'peep-list-item'}
                     >
                         <ListItemAvatar>
                             <Avatar>{icon}</Avatar>
