@@ -18,6 +18,7 @@ import {
         Route,
         Link
 } from "react-router-dom";
+import Timeslots from "./components/settings/Timeslots";
 
 
 axios.defaults.baseURL = config.BASE_PATH;
@@ -62,6 +63,9 @@ function App() {
                     </Route>
                     <Route exact path="/">
                         <Home/>
+                    </Route>
+                    <Route exact path="/settings">
+                        <Timeslots/>
                     </Route>
                 </div>
             </Switch>
