@@ -5,6 +5,8 @@ import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import axios from "axios";
+import {isMobile} from 'react-device-detect';
+
 
 function reducer(state, action) {
     switch (action.type) {
@@ -54,7 +56,7 @@ export default function Phone({setPhone}) {
             {alert}
             <div className="form-div">
                 <form onSubmit={submitPhoneNumber}>
-                    <TextField autoFocus id="phone_number" label="Phone Number" variant="outlined" onChange={e => setText(e.target.value)}/>
+                    <TextField autoFocus={!isMobile} id="phone_number" label="Phone Number" variant="outlined" onChange={e => setText(e.target.value)}/>
                     <br/>
                     <div className="centered">
                         <Button disabled={state.spinner} variant="contained" type="submit">authenticate</Button>
