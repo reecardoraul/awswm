@@ -21,44 +21,38 @@ export default function Timeslot({timeslot, onSave}) {
     })
 
     return (
-        <div>
-            <form onSubmit={formik.handleSubmit}>
-                <div className='form-div'>
-                    <div className='form-element'><TextField value={formik.values.coordinator}
-                                                             onChange={formik.handleChange}
-                                                             error={formik.touched.coordinator && Boolean(formik.errors.coordinator)}
-                                                             helperText={formik.touched.coordinator && formik.errors.coordinator}
-                                                             fullWidth required name="coordinator" label="Coordinator"
-                                                             variant="outlined"/></div>
-                    <div className='form-element'><TextField value={formik.values.co_phone}
-                                                             type="tel"
-                                                             onChange={formik.handleChange}
-                                                             error={formik.touched.co_phone && Boolean(formik.errors.co_phone)}
-                                                             helperText={formik.touched.co_phone && formik.errors.co_phone}
-                                                             fullWidth required name="co_phone" label="Phone Number"
-                                                             variant="outlined"/></div>
-                    <div className='form-element'><TextField value={formik.values.co_email}
-                                                             type="email"
-                                                             onChange={formik.handleChange}
-                                                             error={formik.touched.co_email && Boolean(formik.errors.co_email)}
-                                                             helperText={formik.touched.co_email && formik.errors.co_email}
-                                                             fullWidth required name="co_email" label="Email"
-                                                             variant="outlined"/></div>
-                    <div className='form-element'><TextField value={formik.values.first_night}
-                                                             type="date"
-                                                             onChange={formik.handleChange}
-                                                             error={formik.touched.first_night && Boolean(formik.errors.first_night)}
-                                                             helperText={formik.touched.first_night && formik.errors.first_night}
-                                                             fullWidth name="first_night" label="First Ski"
-                                                             variant="outlined"/></div>
-                    <div>
-                        <Button variant="contained" color="primary"
-                            //disabled={isSubmitting}
-                                type="submit">Save</Button>
-                    </div>
-                </div>
-            </form>
-        </div>
+        <form onSubmit={formik.handleSubmit}>
+            <div className='form-element'><TextField value={formik.values.coordinator}
+                                                     onChange={formik.handleChange}
+                                                     error={formik.touched.coordinator && Boolean(formik.errors.coordinator)}
+                                                     helperText={formik.touched.coordinator && formik.errors.coordinator}
+                                                     required name="coordinator" label="Coordinator"
+                                                     variant="outlined"/></div>
+            <div className='form-element'><TextField value={formik.values.co_phone}
+                                                     type="tel"
+                                                     onChange={formik.handleChange}
+                                                     error={formik.touched.co_phone && Boolean(formik.errors.co_phone)}
+                                                     helperText={formik.touched.co_phone && formik.errors.co_phone}
+                                                     required name="co_phone" label="Phone Number"
+                                                     variant="outlined"/></div>
+            <div className='form-element'><TextField value={formik.values.co_email}
+                                                     type="email"
+                                                     onChange={formik.handleChange}
+                                                     error={formik.touched.co_email && Boolean(formik.errors.co_email)}
+                                                     helperText={formik.touched.co_email && formik.errors.co_email}
+                                                     required name="co_email" label="Email"
+                                                     variant="outlined"/></div>
+            <div className='form-element'><TextField value={formik.values.first_night}
+                                                     type="date"
+                                                     onChange={formik.handleChange}
+                                                     error={formik.touched.first_night && Boolean(formik.errors.first_night)}
+                                                     helperText={formik.touched.first_night && formik.errors.first_night}
+                                                     name="first_night" label="First Ski"
+                                                     variant="outlined"/></div>
+            <div>
+                <Button variant="contained" color="primary" type="submit">Save</Button>
+            </div>
+        </form>
     );
 }
 
