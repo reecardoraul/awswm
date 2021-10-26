@@ -275,27 +275,27 @@ export default function Vol({volunteer}) {
                         <CardContent>
                             <Typography sx={{fontSize: 14}} color="text.secondary">Committees</Typography>
                             <FormControlLabel
-                                control={<Checkbox id="committee_training" value={formik.values.committee_training}/>}
+                                control={<Checkbox id="committee_training" value="true" checked={formik.values.committee_training}/>}
                                 label="Training"/>
-                            <FormControlLabel control={<Checkbox id="committee_pr" value={formik.values.committee_pr}/>}
+                            <FormControlLabel control={<Checkbox id="committee_pr" value="true" checked={formik.values.committee_pr}/>}
                                               label="Public Relations"/>
                             <FormControlLabel
-                                control={<Checkbox id="committee_board" value={formik.values.committee_board}/>}
+                                control={<Checkbox id="committee_board" value="true" checked={formik.values.committee_board}/>}
                                 label="Board Member"/>
                             <FormControlLabel
-                                control={<Checkbox id="committee_equipment" value={formik.values.committee_equipment}/>}
+                                control={<Checkbox id="committee_equipment" value="true" checked={formik.values.committee_equipment}/>}
                                 label="Equipment"/>
-                            <FormControlLabel control={<Checkbox id="committee_fundraising"
-                                                                 value={formik.values.committee_fundraising}/>}
+                            <FormControlLabel control={<Checkbox id="committee_fundraising" value="true"
+                                                                 chcked={formik.values.committee_fundraising}/>}
                                               label="Fundraising"/>
                             <FormControlLabel
-                                control={<Checkbox id="committee_web" value={formik.values.committee_web}/>}
+                                control={<Checkbox id="committee_web" value="true" checked={formik.values.committee_web}/>}
                                 label="Website"/>
                             <FormControlLabel
-                                control={<Checkbox id="committee_mail" value={formik.values.committee_mail}/>}
+                                control={<Checkbox id="committee_mail" value="true" checked={formik.values.committee_mail}/>}
                                 label="Mail"/>
-                            <FormControlLabel control={<Checkbox id="committee_special_events"
-                                                                 value={formik.values.committee_special_events}/>}
+                            <FormControlLabel control={<Checkbox id="committee_special_events" checked={formik.values.committee_special_events}
+                                                                 value="true"/>}
                                               label="Events"/>
                         </CardContent>
                     </Card>
@@ -303,17 +303,17 @@ export default function Vol({volunteer}) {
                     <Card variant="outlined" sx={sx}>
                         <CardContent>
                             <Typography sx={{fontSize: 14}} color="text.secondary">Training Desired:</Typography>
-                            <FormControlLabel control={<Checkbox id="training_sit" value={formik.values.training_sit}/>}
+                            <FormControlLabel control={<Checkbox id="training_sit" value="true" checked={formik.values.training_sit}/>}
                                               label="Sit Down"/>
                             <FormControlLabel
-                                control={<Checkbox id="training_stand" value={formik.values.training_stand}/>}
+                                control={<Checkbox id="training_stand" value="true" checked={formik.values.training_stand}/>}
                                 label="Stand Up"/>
 
 
                             <FormControlLabel label="Comfortable taking athelete on chairlift?"
-                                              control={<Checkbox id="can_chair" value={formik.values.can_chair}/>}/>
+                                              control={<Checkbox id="can_chair" value="true" checked={formik.values.can_chair}/>}/>
                             <FormControlLabel
-                                control={<Checkbox id="needs_rentals" value={formik.values.needs_rentals}/>}
+                                control={<Checkbox id="needs_rentals" value="true" checked={formik.values.needs_rentals}/>}
                                 label="Do you need rental skis?"/>
                             <TextField value={formik.values.student_name} sx={sx} fullWidth={isMobile}
                                        onChange={formik.handleChange}
@@ -325,19 +325,19 @@ export default function Vol({volunteer}) {
                             <Card variant="outlined">
                                 <CardContent>
                                     <Typography sx={{fontSize: 14}} color="text.secondary">Availability:</Typography>
-                                    <FormControlLabel control={<Checkbox id="tuesday" value={formik.values.tuesday}/>}
+                                    <FormControlLabel control={<Checkbox id="tuesday" value="true" checked={formik.values.tuesday}/>}
                                                       label="Tuesday 6-8p"/>
-                                    <FormControlLabel control={<Checkbox id="wednesday" value={formik.values.wednesday}/>}
+                                    <FormControlLabel control={<Checkbox id="wednesday" value="true" checked={formik.values.wednesday}/>}
                                                       label="Wednesday 6-8p"/>
-                                    <FormControlLabel control={<Checkbox id="thursday" value={formik.values.thursday}/>}
+                                    <FormControlLabel control={<Checkbox id="thursday" value="true" checked={formik.values.thursday}/>}
                                                       label="Thursday 6-8p"/>
-                                    <FormControlLabel control={<Checkbox id="sunday1" value={formik.values.sunday1}/>}
+                                    <FormControlLabel control={<Checkbox id="sunday1" value="true" checked={formik.values.sunday1}/>}
                                                       label="Sunday 1-3p"/>
-                                    <FormControlLabel control={<Checkbox id="sunday2" value={formik.values.sunday2}/>}
+                                    <FormControlLabel control={<Checkbox id="sunday2" value="true" checked={formik.values.sunday2}/>}
                                                       label="Sunday 2-4p"/>
-                                    <FormControlLabel control={<Checkbox id="sunday3" value={formik.values.sunday3}/>}
+                                    <FormControlLabel control={<Checkbox id="sunday3" value="true" checked={formik.values.sunday3}/>}
                                                       label="Sunday 3-5p"/>
-                                    <FormControlLabel control={<Checkbox id="multiple_lessons" value={formik.values.multiple_lessons}/>}
+                                    <FormControlLabel control={<Checkbox id="multiple_lessons" value="true" checked={formik.values.multiple_lessons}/>}
                                                       label="Multiple Lessons?"/>
                                 </CardContent>
                             </Card>
