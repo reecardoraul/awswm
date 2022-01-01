@@ -129,7 +129,7 @@ export default function Athlete({athlete}) {
                 avatar={<Avatar><DownhillSkiingIcon/></Avatar>}
                 title={<Typography variant='caption' sx={{fontSize: 24}}
                                    color="text.secondary">{title}</Typography>}/>
-            <CardContent>
+            <CardContent fullWidth={isMobile}>
                 <form onSubmit={formik.handleSubmit}>
                     <TextField value={formik.values.firstname}
                                sx={sx}
@@ -249,7 +249,7 @@ export default function Athlete({athlete}) {
                                variant="outlined"/>
 
                     <Card variant="outlined" sx={sx}>
-                        <CardContent>
+                        <CardContent fullWidth={isMobile}>
                             <Typography sx={{fontSize: 14}} color="text.secondary">Committees</Typography>
                             <FormControlLabel
                                 control={<Checkbox id="committee_training" value="true" onChange={formik.handleChange}
@@ -363,7 +363,7 @@ export default function Athlete({athlete}) {
                     </Card>
 
                     <Card variant="outlined" sx={sx}>
-                        <CardContent>
+                        <CardContent fullWidth={isMobile}>
                             <Typography sx={{fontSize: 14}} color="text.secondary">Seizures</Typography>
                             <FormControlLabel
                                 control={<Checkbox id="seizure" value="true" onChange={formik.handleChange}
@@ -393,7 +393,7 @@ export default function Athlete({athlete}) {
                     </Card>
 
                     <Card variant="outlined" sx={sx}>
-                        <CardContent>
+                        <CardContent fullWidth={isMobile}>
                             <Typography sx={{fontSize: 14}} color="text.secondary">Sit-Down Skiers</Typography>
                             <div>
                                 <FormControlLabel
@@ -436,7 +436,7 @@ export default function Athlete({athlete}) {
 
 
                     <Card variant="outlined" sx={sx}>
-                        <CardContent>
+                        <CardContent fullWidth={isMobile}>
                             <Typography sx={{fontSize: 14}} color="text.secondary">Preferences</Typography>
                             <TextField value={formik.values.volunteer_name} sx={sx} fullWidth={isMobile}
                                        onChange={formik.handleChange}
@@ -445,8 +445,9 @@ export default function Athlete({athlete}) {
                                        name="volunteer_name" label="Preferred Volunteer"
                                        variant="outlined"/>
 
-                            <div>
-                                <Card variant="outlined" style={styles} sx={sx}><CardContent>
+                            <div fullWidth={isMobile}>
+                                <Card variant="outlined" style={styles} sx={sx} fullWidth={isMobile}>
+                                    <CardContent fullWidth={isMobile}>
                                     <Typography sx={{fontSize: 14}} color="text.secondary">First Choice</Typography>
                                     <RadioGroup aria-label="first_choice" name="first_choice"
                                                 value={formik.values.first_choice} onChange={formik.handleChange}>
@@ -459,7 +460,8 @@ export default function Athlete({athlete}) {
                                     </RadioGroup>
                                 </CardContent></Card>
 
-                                <Card variant="outlined" style={styles} sx={sx}><CardContent>
+                                <Card variant="outlined" style={styles} sx={sx}>
+                                    <CardContent  fullWidth={isMobile}>
                                     <Typography sx={{fontSize: 14}} color="text.secondary">Second Choice</Typography>
                                     <RadioGroup aria-label="second_choice" name="second_choice"
                                                 value={formik.values.second_choice} onChange={formik.handleChange}>

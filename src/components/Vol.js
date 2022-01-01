@@ -126,7 +126,7 @@ export default function Vol({volunteer}) {
 
     let title = volunteer.id ? volunteer.lastname + ", " + volunteer.firstname : "New Volunteer";
 
-    let sx = isMobile ? {marginBottom: 1.1} : {margin: 1};
+    let sx = isMobile ? {marginBottom: 1.1, marginRight: 1} : {margin: 1};
     return (
         <Card variant="outlined">
             <CardHeader
@@ -137,7 +137,6 @@ export default function Vol({volunteer}) {
                 <form onSubmit={formik.handleSubmit}>
                     <TextField value={formik.values.firstname}
                                sx={sx}
-                               fullWidth={isMobile}
                                onChange={formik.handleChange}
                                error={formik.touched.firstname && Boolean(formik.errors.firstname)}
                                helperText={formik.touched.firstname && formik.errors.firstname}
@@ -145,7 +144,6 @@ export default function Vol({volunteer}) {
                                variant="outlined"/>
                     <TextField value={formik.values.lastname}
                                sx={sx}
-                               fullWidth={isMobile}
                                onChange={formik.handleChange}
                                error={formik.touched.lastname && Boolean(formik.errors.lastname)}
                                helperText={formik.touched.lastname && formik.errors.lastname}
@@ -153,7 +151,6 @@ export default function Vol({volunteer}) {
                                variant="outlined"/>
                     <TextField value={formik.values.birthdate} sx={sx}
                                InputLabelProps={{ shrink: true }}
-                               fullWidth={isMobile}
                                type="date"
                                onChange={formik.handleChange}
                                error={formik.touched.birthdate && Boolean(formik.errors.birthdate)}
@@ -161,34 +158,30 @@ export default function Vol({volunteer}) {
                                required name="birthdate" label="Birthdate"
                                variant="outlined"/>
                     <TextField value={formik.values.email} sx={sx}
-                               fullWidth={isMobile}
                                onChange={formik.handleChange}
                                error={formik.touched.email && Boolean(formik.errors.email)}
                                helperText={formik.touched.email && formik.errors.email}
                                required name="email" label="Email"
                                variant="outlined"/>
                     <TextField value={formik.values.phone_primary} sx={sx}
-                               fullWidth={isMobile}
                                onChange={formik.handleChange}
                                error={formik.touched.phone_primary && Boolean(formik.errors.phone_primary)}
                                helperText={formik.touched.phone_primary && formik.errors.phone_primary}
                                required name="phone_primary" label="Phone Number"
                                variant="outlined"/>
-                    <TextField value={formik.values.phone_secondary} sx={sx} fullWidth={isMobile}
+                    <TextField value={formik.values.phone_secondary} sx={sx}
                                onChange={formik.handleChange}
                                error={formik.touched.phone_secondary && Boolean(formik.errors.phone_secondary)}
                                helperText={formik.touched.phone_secondary && formik.errors.phone_secondary}
                                name="phone_secondary" label="Secondary Phone"
                                variant="outlined"/>
                     <TextField value={formik.values.occupation} sx={sx}
-                               fullWidth={isMobile}
                                onChange={formik.handleChange}
                                error={formik.touched.occupation && Boolean(formik.errors.occupation)}
                                helperText={formik.touched.occupation && formik.errors.occupation}
                                name="occupation" label="Occupation"
                                variant="outlined"/>
                     <TextField value={formik.values.address} sx={sx}
-                               fullWidth={isMobile}
                                onChange={formik.handleChange}
                                error={formik.touched.address && Boolean(formik.errors.address)}
                                helperText={formik.touched.address && formik.errors.address}
@@ -212,13 +205,13 @@ export default function Vol({volunteer}) {
                                helperText={formik.touched.zip && formik.errors.zip}
                                name="zip" label="Zip Code"
                                variant="outlined"/>
-                    <TextField value={formik.values.how_heard_of} sx={sx} fullWidth={isMobile}
+                    <TextField value={formik.values.how_heard_of} sx={sx}
                                onChange={formik.handleChange}
                                error={formik.touched.how_heard_of && Boolean(formik.errors.how_heard_of)}
                                helperText={formik.touched.how_heard_of && formik.errors.how_heard_of}
                                name="how_heard_of" label="How did you hear about us?"
                                variant="outlined"/>
-                    <TextField value={formik.values.previous_years} sx={sx} fullWidth={isMobile}
+                    <TextField value={formik.values.previous_years} sx={sx}
                                type={"number"}
                                onChange={formik.handleChange}
                                error={formik.touched.previous_years && Boolean(formik.errors.previous_years)}
@@ -226,26 +219,27 @@ export default function Vol({volunteer}) {
                                name="previous_years" label="How many years with Us?"
                                variant="outlined"/>
 
-                    <TextField value={formik.values.emer_contact} sx={sx} fullWidth={isMobile}
+                    <TextField value={formik.values.emer_contact} sx={sx}
                                onChange={formik.handleChange}
                                error={formik.touched.emer_contact && Boolean(formik.errors.emer_contact)}
                                helperText={formik.touched.emer_contact && formik.errors.emer_contact}
                                name="emer_contact" label="Emergency Contact"
                                variant="outlined"/>
-                    <TextField value={formik.values.emer_contact_primary_phone} sx={sx} fullWidth={isMobile}
+                    <TextField value={formik.values.emer_contact_primary_phone} sx={sx}
                                onChange={formik.handleChange}
                                error={formik.touched.emer_contact_primary_phone && Boolean(formik.errors.emer_contact_primary_phone)}
                                helperText={formik.touched.emer_contact_primary_phone && formik.errors.emer_contact_primary_phone}
                                name="emer_contact_primary_phone" label="Emergency Phone"
                                variant="outlined"/>
-                    <TextField value={formik.values.emer_contact_secondary_phone} sx={sx} fullWidth={isMobile}
+                    <TextField value={formik.values.emer_contact_secondary_phone} sx={sx}
                                onChange={formik.handleChange}
                                error={formik.touched.emer_contact_secondary_phone && Boolean(formik.errors.emer_contact_secondary_phone)}
                                helperText={formik.touched.emer_contact_secondary_phone && formik.errors.emer_contact_secondary_phone}
                                name="emer_contact_secondary_phone" label="Emergency Secondary Phone"
                                variant="outlined"/>
 
-                    <FormControl sx={sx} fullWidth={isMobile}>
+                               <br/>
+                    <FormControl sx={sx}>
                         <InputLabel id="shirt_size_label">Shirt Size</InputLabel>
                         <Select id='shirt_size' labelId='shirt_size_label' label='Shirt Size'
                                 value={formik.values.shirt_size}>
@@ -259,7 +253,7 @@ export default function Vol({volunteer}) {
                         </Select>
                     </FormControl>
 
-                    <FormControl sx={sx} fullWidth={isMobile}>
+                    <FormControl sx={sx}>
                         <InputLabel id="skilevel_label">Ski Proficiency</InputLabel>
                         <Select id='skilevel' labelId='skilevel_label' label='Ski Proficiency'
                                 value={formik.values.skilevel}>
@@ -374,7 +368,7 @@ export default function Vol({volunteer}) {
                         </CardContent>
                     </Card>
 
-                    <TextField value={formik.values.donation_amount} sx={sx} fullWidth={isMobile}
+                    <TextField value={formik.values.donation_amount} sx={sx}
                                onChange={formik.handleChange}
                                error={formik.touched.donation_amount && Boolean(formik.errors.donation_amount)}
                                helperText={formik.touched.donation_amount && formik.errors.donation_amount}
