@@ -9,10 +9,14 @@ import {
     Typography,
     TextField,
     Checkbox,
+    Collapse,
     Button,
     CardHeader,
     CardContent,
-    Card, FormControl
+    Card, FormControl,
+    Radio,
+    RadioGroup,
+    Switch
 } from "@mui/material";
 import DownhillSkiingIcon from '@mui/icons-material/DownhillSkiing';
 
@@ -21,6 +25,24 @@ import {useFormik} from 'formik';
 import {isMobile} from "react-device-detect";
 import InputLabel from "@mui/material/InputLabel";
 import FormControlLabel from "@mui/material/FormControlLabel";
+
+function getChoiceDay(athlete, choice) {
+    if (!athlete)
+        return '';
+    if (athlete.tuesday == choice)
+        return "tuesday";
+    if (athlete.wednesday == choice)
+        return "wednesday";
+    if (athlete.thursday == choice)
+        return "thursday";
+    if (athlete.sunday1 == choice)
+        return "sunday1";
+    if (athlete.sunday2 == choice)
+        return "sunday2";
+    if (athlete.sunday3 == choice)
+        return "sunday3";
+    return '';
+}
 
 export default function Athlete({athlete}) {
     const formik = useFormik({
@@ -71,15 +93,36 @@ export default function Athlete({athlete}) {
             ad_dd: athlete.ad_dd ? athlete.ad_dd : '',
             ad_mono: athlete.ad_mono ? athlete.ad_mono : '',
             ad_bi: athlete.ad_bi ? athlete.ad_bi : '',
-            disability_descrip: athlete.disability_descrip ? athlete.disability_descrip : ''
+            disability_descrip: athlete.disability_descrip ? athlete.disability_descrip : '',
+            doctors_descrip: athlete.doctors_descrip ? athlete.doctors_descrip : '',
+            limitation: athlete.limitation ? athlete.limitation : '',
+            precaution: athlete.precaution ? athlete.precaution : '',
+            allergies: athlete.allergies ? athlete.allergies : '',
+            hebb: athlete.hebb ? athlete.hebb : '',
+            downs: athlete.downs ? athlete.downs : '',
+            assist_eat: athlete.assist_eat ? athlete.assist_eat : '',
+            assist_bathroom: athlete.assist_bathroom ? athlete.assist_bathroom : '',
+            sit_roll: athlete.sit_roll ? athlete.sit_roll : '',
+            sit_arms: athlete.sit_arms ? athlete.sit_arms : '',
+            sit_injury: athlete.sit_injury ? athlete.sit_injury : '',
+            sit_brace: athlete.sit_brace ? athlete.sit_brace : '',
+            sit_rods: athlete.sit_rods ? athlete.sit_rods : '',
+            sit_rods_length: athlete.sit_rods_length ? athlete.sit_rods_length : '',
+            first_choice: getChoiceDay(athlete, "1"),
+            second_choice: getChoiceDay(athlete, "2"),
+            third_choice: getChoiceDay(athlete, "3"),
         },
         onSubmit: (values) => {
             alert(JSON.stringify(values, null, 2));
         },
     })
 
+    const styles = {
+        display: "inline-block"
+    };
+
     let sx = isMobile ? {marginBottom: 1.1} : {margin: 1};
-    let title = athlete.firstname && athlete.lastname ? athlete.lastname + ", " + athlete.firstname : "New Athlete";
+    let title = athlete.id ? athlete.lastname + ", " + athlete.firstname : "New Athlete";
     return (
         <Card variant="outlined">
             <CardHeader
@@ -105,6 +148,7 @@ export default function Athlete({athlete}) {
                                required name="lastname" label="Last"
                                variant="outlined"/>
                     <TextField value={formik.values.birthdate} sx={sx}
+                               InputLabelProps={{shrink: true}}
                                fullWidth={isMobile}
                                type="date"
                                onChange={formik.handleChange}
@@ -132,6 +176,12 @@ export default function Athlete({athlete}) {
                                helperText={formik.touched.phone_secondary && formik.errors.phone_secondary}
                                name="phone_secondary" label="Secondary Phone"
                                variant="outlined"/>
+                    <TextField value={formik.values.guardian} sx={sx} fullWidth={isMobile}
+                               onChange={formik.handleChange}
+                               error={formik.touched.guardian && Boolean(formik.errors.guardian)}
+                               helperText={formik.touched.guardian && formik.errors.guardian}
+                               name="guardian" label="Parent/Guardian"
+                               variant="outlined"/>
                     <TextField value={formik.values.height} sx={sx}
                                fullWidth={isMobile}
                                onChange={formik.handleChange}
@@ -146,7 +196,7 @@ export default function Athlete({athlete}) {
                                helperText={formik.touched.weight && formik.errors.weight}
                                inputMode="decimal"
                                name="occupation" label="Weight"
-                               variant="outlined"/>           
+                               variant="outlined"/>
                     <TextField value={formik.values.address} sx={sx}
                                fullWidth={isMobile}
                                onChange={formik.handleChange}
@@ -189,28 +239,14 @@ export default function Athlete({athlete}) {
                                onChange={formik.handleChange}
                                error={formik.touched.emer_contact_primary_phone && Boolean(formik.errors.emer_contact_primary_phone)}
                                helperText={formik.touched.emer_contact_primary_phone && formik.errors.emer_contact_primary_phone}
-                               name="emer_contact_primary_phone" label="Primary Phone"
+                               name="emer_contact_primary_phone" label="Emergency Phone"
                                variant="outlined"/>
                     <TextField value={formik.values.emer_contact_secondary_phone} sx={sx} fullWidth={isMobile}
                                onChange={formik.handleChange}
                                error={formik.touched.emer_contact_secondary_phone && Boolean(formik.errors.emer_contact_secondary_phone)}
                                helperText={formik.touched.emer_contact_secondary_phone && formik.errors.emer_contact_secondary_phone}
-                               name="emer_contact_secondary_phone" label="Secondary Phone"
+                               name="emer_contact_secondary_phone" label="Emergency Secondary Phone"
                                variant="outlined"/>
-
-                    <FormControl sx={sx} fullWidth={isMobile}>
-                        <InputLabel id="shirt_size_label">Shirt Size</InputLabel>
-                        <Select id='shirt_size' labelId='shirt_size_label' label='Shirt Size'
-                                value={formik.values.shirt_size}>
-                            <MenuItem value=''>Unknown</MenuItem>
-                            <MenuItem value='XS'>XSmall</MenuItem>
-                            <MenuItem value='S'>Small</MenuItem>
-                            <MenuItem value='M'>Medium</MenuItem>
-                            <MenuItem value='L'>Large</MenuItem>
-                            <MenuItem value='XL'>XLarge</MenuItem>
-                            <MenuItem value='XXL'>XXLarge</MenuItem>
-                        </Select>
-                    </FormControl>
 
                     <Card variant="outlined" sx={sx}>
                         <CardContent>
@@ -257,7 +293,11 @@ export default function Athlete({athlete}) {
                             <FormControlLabel
                                 control={<Checkbox id="dis_amp" onChange={formik.handleChange} value="true"
                                                    checked={formik.values.dis_amp}/>}
-                                label="AMP"/>
+                                label="Amputee"/>
+                            <FormControlLabel
+                                control={<Checkbox id="dis_cp" onChange={formik.handleChange} value="true"
+                                                   checked={formik.values.dis_cp}/>}
+                                label="Cereberal Palsy"/>
                             <FormControlLabel
                                 control={<Checkbox id="dis_dd" onChange={formik.handleChange} value="true"
                                                    checked={formik.values.dis_dd}/>}
@@ -277,11 +317,7 @@ export default function Athlete({athlete}) {
                             <FormControlLabel
                                 control={<Checkbox id="dis_sci" onChange={formik.handleChange} value="true"
                                                    checked={formik.values.dis_sci}/>}
-                                label="SCI"/>
-                            <FormControlLabel
-                                control={<Checkbox id="dis_cp" onChange={formik.handleChange} value="true"
-                                                   checked={formik.values.dis_cp}/>}
-                                label="Cereberal Palsy"/>
+                                label="Spinal Cord Injury"/>
                             <FormControlLabel
                                 control={<Checkbox id="dis_stroke" onChange={formik.handleChange} value="true"
                                                    checked={formik.values.dis_stroke}/>}
@@ -302,56 +338,158 @@ export default function Athlete({athlete}) {
                                        onChange={formik.handleChange}
                                        error={formik.touched.disability_descrip && Boolean(formik.errors.disability_descrip)}
                                        helperText={formik.touched.disability_descrip && formik.errors.disability_descrip}
-                                       name="dis_other" label="Disability Description"
+                                       name="disability_descrip" label="Disability Description"
+                                       variant="outlined"/>
+                            <TextField value={formik.values.doctor_descrip} sx={sx} fullWidth={isMobile}
+                                       onChange={formik.handleChange}
+                                       error={formik.touched.doctor_descrip && Boolean(formik.errors.doctor_descrip)}
+                                       helperText={formik.touched.doctor_descrip && formik.errors.doctor_descrip}
+                                       name="doctor_descrip" label="Is skier under doctors care for any condition?"
+                                       variant="outlined"/>
+                            <TextField value={formik.values.limitation} sx={sx} fullWidth={isMobile}
+                                       onChange={formik.handleChange}
+                                       error={formik.touched.limitation && Boolean(formik.errors.limitation)}
+                                       helperText={formik.touched.limitation && formik.errors.limitation}
+                                       name="limitation" label="Medical Precautions?"
+                                       variant="outlined"/>
+                            <TextField value={formik.values.allergies} sx={sx} fullWidth={isMobile}
+                                       onChange={formik.handleChange}
+                                       error={formik.touched.allergies && Boolean(formik.errors.allergies)}
+                                       helperText={formik.touched.allergies && formik.errors.allergies}
+                                       name="allergies" label="Allergies"
                                        variant="outlined"/>
 
                         </CardContent>
                     </Card>
 
-                    <Card variant="outlined">
+                    <Card variant="outlined" sx={sx}>
                         <CardContent>
                             <Typography sx={{fontSize: 14}} color="text.secondary">Seizures</Typography>
                             <FormControlLabel
-                                control={<Checkbox id="ad_2t" value="true" onChange={formik.handleChange}
-                                                   checked={formik.values.ad_2t}/>}
-                                label="2 Track"/>
-                            <FormControlLabel
-                                control={<Checkbox id="ad_3t" value="true" onChange={formik.handleChange}
-                                                   checked={formik.values.ad_2t}/>}
-                                label="3 Track"/>
-                            <FormControlLabel
-                                control={<Checkbox id="wednesday" value="true" onChange={formik.handleChange}
-                                                   checked={formik.values.wednesday}/>}
-                                label="Wednesday 6-8p"/>
-                            <FormControlLabel
-                                control={<Checkbox id="thursday" value="true" onChange={formik.handleChange}
-                                                   checked={formik.values.thursday}/>}
-                                label="Thursday 6-8p"/>
-                            <FormControlLabel
-                                control={<Checkbox id="sunday1" value="true" onChange={formik.handleChange}
-                                                   checked={formik.values.sunday1}/>}
-                                label="Sunday 1-3p"/>
-                            <FormControlLabel
-                                control={<Checkbox id="sunday2" value="true" onChange={formik.handleChange}
-                                                   checked={formik.values.sunday2}/>}
-                                label="Sunday 2-4p"/>
-                            <FormControlLabel
-                                control={<Checkbox id="sunday3" value="true" onChange={formik.handleChange}
-                                                   checked={formik.values.sunday3}/>}
-                                label="Sunday 3-5p"/>
-                            <FormControlLabel control={<Checkbox id="multiple_lessons" value="true"
-                                                                 onChange={formik.handleChange}
-                                                                 checked={formik.values.multiple_lessons}/>}
-                                              label="Multiple Lessons?"/>
+                                control={<Checkbox id="seizure" value="true" onChange={formik.handleChange}
+                                                   checked={formik.values.seizure}/>}
+                                label="Experiences Seizures"/>
+                            <Collapse in={formik.values.seizure}>
+                                <TextField value={formik.values.seizure_med} sx={sx} fullWidth={isMobile}
+                                           onChange={formik.handleChange}
+                                           error={formik.touched.seizure_med && Boolean(formik.errors.seizure_med)}
+                                           helperText={formik.touched.seizure_med && formik.errors.seizure_med}
+                                           name="seizure_med" label="Seizure Medication"
+                                           variant="outlined"/>
+                                <TextField value={formik.values.seizure_type} sx={sx} fullWidth={isMobile}
+                                           onChange={formik.handleChange}
+                                           error={formik.touched.seizure_type && Boolean(formik.errors.seizure_type)}
+                                           helperText={formik.touched.seizure_type && formik.errors.seizure_type}
+                                           name="seizure_type" label="Seizure Type"
+                                           variant="outlined"/>
+                                <TextField value={formik.values.seizure_last} sx={sx} fullWidth={isMobile}
+                                           onChange={formik.handleChange}
+                                           error={formik.touched.seizure_last && Boolean(formik.errors.seizure_last)}
+                                           helperText={formik.touched.seizure_last && formik.errors.seizure_last}
+                                           name="seizure_last" label="When was last seizure?"
+                                           variant="outlined"/>
+                            </Collapse>
                         </CardContent>
                     </Card>
 
-                    <TextField value={formik.values.donation_amount} sx={sx} fullWidth={isMobile}
-                               onChange={formik.handleChange}
-                               error={formik.touched.donation_amount && Boolean(formik.errors.donation_amount)}
-                               helperText={formik.touched.donation_amount && formik.errors.donation_amount}
-                               name="donation_amount" label="Donation"
-                               variant="outlined"/>
+                    <Card variant="outlined" sx={sx}>
+                        <CardContent>
+                            <Typography sx={{fontSize: 14}} color="text.secondary">Sit-Down Skiers</Typography>
+                            <div>
+                                <FormControlLabel
+                                    control={<Switch id="sit_roll" onChange={formik.handleChange} value="true"
+                                                     checked={formik.values.sit_roll}/>}
+                                    label="Will rolling onto shoulders cause dizziness or pain?"/></div>
+                            <div>
+                                <FormControlLabel
+                                    control={<Switch id="sit_arms" onChange={formik.handleChange} value="true"
+                                                     checked={formik.values.sit_arms}/>}
+                                    label="Can push wheelchair independently?"/></div>
+                            <div>
+                                <FormControlLabel
+                                    control={<Switch id="sit_injury" onChange={formik.handleChange} value="true"
+                                                     checked={formik.values.sit_injury}/>}
+                                    label="Injury or Surgery to back, spine, or hips in last six months?"/>
+                            </div>
+                            <div>
+                                <FormControlLabel
+                                    control={<Switch id="sit_brace" onChange={formik.handleChange} value="true"
+                                                     checked={formik.values.sit_brace}/>}
+                                    label="Does the skier wear a back brace?"/>
+                            </div>
+                            <div>
+                                <FormControlLabel
+                                    control={<Switch id="sit_rods" onChange={formik.handleChange} value="true"
+                                                     checked={formik.values.sit_rods}/>}
+                                    label="Does the skier have Harrington Rods?"/>
+                                <Collapse in={formik.values.sit_rods}>
+                                    <TextField value={formik.values.sit_rods_length} sx={sx} fullWidth={isMobile}
+                                               onChange={formik.handleChange}
+                                               error={formik.touched.sit_rods_length && Boolean(formik.errors.sit_rods_length)}
+                                               helperText={formik.touched.sit_rods_length && formik.errors.sit_rods_length}
+                                               name="seizure_med" label="How long has the skier had rods?"
+                                               variant="outlined"/>
+                                </Collapse>
+                            </div>
+                        </CardContent>
+                    </Card>
+
+
+                    <Card variant="outlined" sx={sx}>
+                        <CardContent>
+                            <Typography sx={{fontSize: 14}} color="text.secondary">Preferences</Typography>
+                            <TextField value={formik.values.volunteer_name} sx={sx} fullWidth={isMobile}
+                                       onChange={formik.handleChange}
+                                       error={formik.touched.volunteer_name && Boolean(formik.errors.volunteer_name)}
+                                       helperText={formik.touched.volunteer_name && formik.errors.volunteer_name}
+                                       name="volunteer_name" label="Preferred Volunteer"
+                                       variant="outlined"/>
+
+                            <div>
+                                <Card variant="outlined" style={styles} sx={sx}><CardContent>
+                                    <Typography sx={{fontSize: 14}} color="text.secondary">First Choice</Typography>
+                                    <RadioGroup aria-label="first_choice" name="first_choice"
+                                                value={formik.values.first_choice} onChange={formik.handleChange}>
+                                        <FormControlLabel value="tuesday" control={<Radio/>} label="Tuesday 6-8p"/>
+                                        <FormControlLabel value="wednesday" control={<Radio/>} label="Wednesday 6-8p"/>
+                                        <FormControlLabel value="thursday" control={<Radio/>} label="Thursday 6-8p"/>
+                                        <FormControlLabel value="sunday1" control={<Radio/>} label="Sunday 1-3p"/>
+                                        <FormControlLabel value="sunday2" control={<Radio/>} label="Sunday 2-4p"/>
+                                        <FormControlLabel value="sunday3" control={<Radio/>} label="Sunday 3-5p"/>
+                                    </RadioGroup>
+                                </CardContent></Card>
+
+                                <Card variant="outlined" style={styles} sx={sx}><CardContent>
+                                    <Typography sx={{fontSize: 14}} color="text.secondary">Second Choice</Typography>
+                                    <RadioGroup aria-label="second_choice" name="second_choice"
+                                                value={formik.values.second_choice} onChange={formik.handleChange}>
+                                        <FormControlLabel value="tuesday" control={<Radio/>} label="Tuesday 6-8p"/>
+                                        <FormControlLabel value="wednesday" control={<Radio/>} label="Wednesday 6-8p"/>
+                                        <FormControlLabel value="thursday" control={<Radio/>} label="Thursday 6-8p"/>
+                                        <FormControlLabel value="sunday1" control={<Radio/>} label="Sunday 1-3p"/>
+                                        <FormControlLabel value="sunday2" control={<Radio/>} label="Sunday 2-4p"/>
+                                        <FormControlLabel value="sunday3" control={<Radio/>} label="Sunday 3-5p"/>
+                                    </RadioGroup>
+                                </CardContent></Card>
+
+                                <Card variant="outlined" style={styles} sx={sx}><CardContent>
+                                    <Typography sx={{fontSize: 14}} color="text.secondary">Third Choice</Typography>
+                                    <RadioGroup aria-label="second_choice" name="third_choice"
+                                                value={formik.values.third_choice} onChange={formik.handleChange}>
+                                        <FormControlLabel value="tuesday" control={<Radio/>} label="Tuesday 6-8p"/>
+                                        <FormControlLabel value="wednesday" control={<Radio/>} label="Wednesday 6-8p"/>
+                                        <FormControlLabel value="thursday" control={<Radio/>} label="Thursday 6-8p"/>
+                                        <FormControlLabel value="sunday1" control={<Radio/>} label="Sunday 1-3p"/>
+                                        <FormControlLabel value="sunday2" control={<Radio/>} label="Sunday 2-4p"/>
+                                        <FormControlLabel value="sunday3" control={<Radio/>} label="Sunday 3-5p"/>
+                                    </RadioGroup>
+                                </CardContent></Card>
+                            </div>
+
+                        </CardContent>
+                    </Card>
+
+
                     <div>
                         <Button variant="contained" type="submit">Save</Button>
                     </div>
