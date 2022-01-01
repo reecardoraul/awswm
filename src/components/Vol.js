@@ -124,6 +124,7 @@ export default function Vol({volunteer}) {
         alert = <span></span>
     }
 
+    let title = volunteer.id ? volunteer.lastname + ", " + volunteer.firstname : "New Volunteer";
 
     let sx = isMobile ? {marginBottom: 1.1} : {margin: 1};
     return (
@@ -131,7 +132,7 @@ export default function Vol({volunteer}) {
             <CardHeader
                 avatar={<Avatar><VolunteerActivismIcon/></Avatar>}
                 title={<Typography variant='caption' sx={{fontSize: 24}}
-                                   color="text.secondary">{formik.values.lastname + ", " + formik.values.firstname}</Typography>}/>
+                                   color="text.secondary">{title}</Typography>}/>
             <CardContent>
                 <form onSubmit={formik.handleSubmit}>
                     <TextField value={formik.values.firstname}
@@ -151,6 +152,7 @@ export default function Vol({volunteer}) {
                                required name="lastname" label="Last"
                                variant="outlined"/>
                     <TextField value={formik.values.birthdate} sx={sx}
+                               InputLabelProps={{ shrink: true }}
                                fullWidth={isMobile}
                                type="date"
                                onChange={formik.handleChange}
@@ -234,13 +236,13 @@ export default function Vol({volunteer}) {
                                onChange={formik.handleChange}
                                error={formik.touched.emer_contact_primary_phone && Boolean(formik.errors.emer_contact_primary_phone)}
                                helperText={formik.touched.emer_contact_primary_phone && formik.errors.emer_contact_primary_phone}
-                               name="emer_contact_primary_phone" label="Primary Phone"
+                               name="emer_contact_primary_phone" label="Emergency Phone"
                                variant="outlined"/>
                     <TextField value={formik.values.emer_contact_secondary_phone} sx={sx} fullWidth={isMobile}
                                onChange={formik.handleChange}
                                error={formik.touched.emer_contact_secondary_phone && Boolean(formik.errors.emer_contact_secondary_phone)}
                                helperText={formik.touched.emer_contact_secondary_phone && formik.errors.emer_contact_secondary_phone}
-                               name="emer_contact_secondary_phone" label="Secondary Phone"
+                               name="emer_contact_secondary_phone" label="Emergency Secondary Phone"
                                variant="outlined"/>
 
                     <FormControl sx={sx} fullWidth={isMobile}>
