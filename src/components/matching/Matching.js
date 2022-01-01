@@ -6,10 +6,11 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import axios from "axios";
 import {useEffect, useState} from "react";
-import LessonMatching from "./LessonMatching";
+import MatchingLessons from "./MatchingLessons";
+import CircularProgress from "@mui/material/CircularProgress";
 
-async function getLessons(set_lessons) {
-    axios.get("/lessons")
+async function getYearInfo(set_lessons) {
+    axios.get("/yearinfo")
         .catch(error => alert(error.message))
         .then(data => {
             if (data != null) {
@@ -22,7 +23,7 @@ async function getLessons(set_lessons) {
 
 
 function TabPanel(props) {
-    const { children, value, index, ...other } = props;
+    const {children, value, index, ...other} = props;
 
 
     return (
@@ -34,7 +35,7 @@ function TabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Box sx={{ p: 3 }}>
+                <Box sx={{p: 3}}>
                     <Typography>{children}</Typography>
                 </Box>
             )}
@@ -58,25 +59,27 @@ function a11yProps(index) {
 export default function BasicTabs() {
     const [value, setValue] = React.useState(0);
 
-    const [lessons, setLessons] = useState([]);
+    const [yearInfo, setYearInfo] = useState([]);
 
     useEffect(() => {
-        if (lessons && lessons.length === 0)
-            getLessons(setLessons)
-    }, [lessons]);
+        if (yearInfo && yearInfo.length === 0)
+            getYearInfo(setYearInfo)
+    }, [yearInfo]);
 
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
-    const onSave = (saved) =>{
+    const onSave = (saved) => {
 
     }
 
-    return (
-        <Box sx={{ width: '100%' }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+    const tabPanel = () => {
+        return <Box sx={{width: '100%'}}>
+            <Typography variant='caption' sx={{fontSize: 24}} color="text.secondary" gutterBottom>Matching
+                - {yearInfo.year}</Typography>
+            <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                     <Tab label="TUE" {...a11yProps(0)} />
                     <Tab label="WED" {...a11yProps(1)} />
@@ -87,11 +90,11 @@ export default function BasicTabs() {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                {
-                    lessons.map( lesson =>
-                        <LessonMatching key={"lesson-" + lesson.id } lesson={lesson} onSave={onSave}/>
-                    )
-                }
+                <MatchingLessons onSave={onSave()}
+                                 lesson_master={yearInfo.lesson_master}
+                                 peeps={yearInfo.people}
+                                 lessons={yearInfo.lessons.filter(lesson => lesson.timeslot === "TUE")}
+                />
             </TabPanel>
             <TabPanel value={value} index={1}>
                 Item Two
@@ -100,5 +103,11 @@ export default function BasicTabs() {
                 Item Three
             </TabPanel>
         </Box>
-    );
+    }
+
+    if (yearInfo && yearInfo.length === 0){
+        return <CircularProgress />
+    }else {
+        return tabPanel();
+    }
 }
