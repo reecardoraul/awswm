@@ -4,9 +4,26 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import axios from "axios";
+import {useEffect, useState} from "react";
+import LessonMatching from "./LessonMatching";
+
+async function getLessons(set_lessons) {
+    axios.get("/lessons")
+        .catch(error => alert(error.message))
+        .then(data => {
+            if (data != null) {
+                set_lessons(data.data);
+            } else {
+                alert("Unable to fetch Lessons!");
+            }
+        });
+}
+
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
+
 
     return (
         <div
@@ -41,9 +58,21 @@ function a11yProps(index) {
 export default function BasicTabs() {
     const [value, setValue] = React.useState(0);
 
+    const [lessons, setLessons] = useState([]);
+
+    useEffect(() => {
+        if (lessons && lessons.length === 0)
+            getLessons(setLessons)
+    }, [lessons]);
+
+
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    const onSave = (saved) =>{
+
+    }
 
     return (
         <Box sx={{ width: '100%' }}>
@@ -58,7 +87,11 @@ export default function BasicTabs() {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                Item One
+                {
+                    lessons.map( lesson =>
+                        <LessonMatching key={"lesson-" + lesson.id } lesson={lesson} onSave={onSave}/>
+                    )
+                }
             </TabPanel>
             <TabPanel value={value} index={1}>
                 Item Two
