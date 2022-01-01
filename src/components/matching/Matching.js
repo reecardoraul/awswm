@@ -97,10 +97,39 @@ export default function BasicTabs() {
                 />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                Item Two
+                <MatchingLessons onSave={onSave()}
+                                 lesson_master={yearInfo.lesson_master}
+                                 peeps={yearInfo.people}
+                                 lessons={yearInfo.lessons.filter(lesson => lesson.timeslot === "WED")}
+                />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                Item Three
+                <MatchingLessons onSave={onSave()}
+                                 lesson_master={yearInfo.lesson_master}
+                                 peeps={yearInfo.people}
+                                 lessons={yearInfo.lessons.filter(lesson => lesson.timeslot === "THU")}
+                />
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+                <MatchingLessons onSave={onSave()}
+                                 lesson_master={yearInfo.lesson_master}
+                                 peeps={yearInfo.people}
+                                 lessons={yearInfo.lessons.filter(lesson => lesson.timeslot === "SUN1")}
+                />
+            </TabPanel>
+            <TabPanel value={value} index={4}>
+                <MatchingLessons onSave={onSave()}
+                                 lesson_master={yearInfo.lesson_master}
+                                 peeps={yearInfo.people}
+                                 lessons={yearInfo.lessons.filter(lesson => lesson.timeslot === "SUN2")}
+                />
+            </TabPanel>
+            <TabPanel value={value} index={5}>
+                <MatchingLessons onSave={onSave()}
+                                 lesson_master={yearInfo.lesson_master}
+                                 peeps={yearInfo.people}
+                                 lessons={yearInfo.lessons.filter(lesson => lesson.timeslot === "SUN3")}
+                />
             </TabPanel>
         </Box>
     }
