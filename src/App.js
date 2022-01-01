@@ -9,6 +9,7 @@ import Athlete from "./components/Athlete";
 import Home from "./components/Home";
 import DownhillSkiingIcon from '@mui/icons-material/DownhillSkiing';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
+import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import SettingsIcon from '@mui/icons-material/Settings';
 import IconButton from "@mui/material/IconButton";
 
@@ -19,6 +20,7 @@ import {
         Link
 } from "react-router-dom";
 import Timeslots from "./components/settings/Timeslots";
+import Matching from "./components/matching/Matching";
 
 
 axios.defaults.baseURL = config.BASE_PATH;
@@ -44,6 +46,7 @@ function App() {
                 AWSWM Admin
                     <Link to='/volunteers'><IconButton><VolunteerActivismIcon style={{fill:"white"}}/></IconButton></Link>
                     <Link to='/athletes'><IconButton><DownhillSkiingIcon style={{fill:"white"}}/></IconButton></Link>
+                    <Link to='/matching'><IconButton><CompareArrowsIcon style={{fill:"white"}}/></IconButton></Link>
                     <Link to='/settings'><IconButton><SettingsIcon style={{fill:"white"}}/></IconButton></Link>
                   </div>
               </header>
@@ -63,6 +66,9 @@ function App() {
                     </Route>
                     <Route exact path="/">
                         <Home/>
+                    </Route>
+                    <Route exact path="/matching">
+                        <Matching/>
                     </Route>
                     <Route exact path="/settings">
                         <Timeslots/>
