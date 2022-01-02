@@ -20,6 +20,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import DownhillSkiingIcon from '@mui/icons-material/DownhillSkiing';
+import MatchingPeepSearch from "./MatchingPeepSearch";
 
 const volunteer = "volunteer";
 const coordinator = "coordinator";
@@ -85,11 +86,16 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
 
     return <Card key={"editlessoncard_" + lesson.id} variant={"outlined"} style={{paddingBottom: "3px"}}>
         <Backdrop
-            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 , overflow: 'scroll'}}
             open={peepSearchOpen}
             onClick={handleClose}
         >
-            <PeepLister people={peeps} setPeep={addPeepToLesson} label="Add Person" icon={personIcon}/>
+            {/*<PeepLister people={peeps} setPeep={addPeepToLesson} label="Add Person" icon={personIcon}/>*/}
+            <MatchingPeepSearch
+                people={peeps}
+                setPeep={addPeepToLesson}
+                person_lesson={lesson_master}
+            />
         </Backdrop>
 
         <CardHeader title={title} style={{paddingBottom: "2px"}}/>
