@@ -90,7 +90,6 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
             open={peepSearchOpen}
             onClick={handleClose}
         >
-            {/*<PeepLister people={peeps} setPeep={addPeepToLesson} label="Add Person" icon={personIcon}/>*/}
             <MatchingPeepSearch
                 people={peeps}
                 setPeep={addPeepToLesson}
