@@ -89,7 +89,7 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
             open={peepSearchOpen}
             onClick={handleClose}
         >
-            <PeepLister fetchUrl='/volunteers' setPeep={addPeepToLesson} label="Add Person" icon={personIcon}/>
+            <PeepLister people={peeps} setPeep={addPeepToLesson} label="Add Person" icon={personIcon}/>
         </Backdrop>
 
         <CardHeader title={title} style={{paddingBottom: "2px"}}/>

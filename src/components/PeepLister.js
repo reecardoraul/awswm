@@ -35,15 +35,15 @@ async function setPeeps( dispatch, set_peeps, fetchUrl) {
         });
 }
 
-export default function PeepLister({setPeep, nextPath, fetchUrl, icon, label}) {
+export default function PeepLister({setPeep, nextPath, fetchUrl, icon, label, people}) {
     const initialState = {status: 'initial'};
     const [search, set_search] = useState();
-    const [peeps, set_peeps] = useState([]);
+    const [peeps, set_peeps] = useState( people ? people : []);
     const [state, dispatch] = useReducer(reducer, initialState);
     const history = useHistory();
 
     useEffect( () => {
-        if( peeps && peeps.length === 0)
+        if( peeps && peeps.length === 0 )
             setPeeps(dispatch, set_peeps, fetchUrl)
     },[fetchUrl,peeps]);
 
@@ -100,7 +100,8 @@ export default function PeepLister({setPeep, nextPath, fetchUrl, icon, label}) {
 PeepLister.propTypes = {
     setPeep: PropTypes.func.isRequired,
     nextPath: PropTypes.string,
-    fetchUrl: PropTypes.string.isRequired,
+    fetchUrl: PropTypes.string,
     icon: PropTypes.element.isRequired,
-    label: PropTypes.string
+    label: PropTypes.string,
+    people: PropTypes.array
 }
