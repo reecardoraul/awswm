@@ -88,42 +88,45 @@ export default function BasicTabs() {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <MatchingLessons onSave={onSave()}
-                                 lesson_master={yearInfo.lesson_master}
-                                 peeps={yearInfo.people}
-                                 lessons={yearInfo.lessons.filter(lesson => lesson.timeslot === "TUE")}
+                <MatchingLessons
+                    timeslot="TUE"
+                    onSave={onSave()}
+                    lesson_master={yearInfo.lesson_master}
+                    peeps={yearInfo.people}
+                    lessons={yearInfo.lessons.filter(lesson => lesson.timeslot === "TUE")}
                 />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <MatchingLessons onSave={onSave()}
+                <MatchingLessons timeslot="WED" onSave={onSave()}
                                  lesson_master={yearInfo.lesson_master}
                                  peeps={yearInfo.people}
-                                 lessons={yearInfo.lessons.filter(lesson => lesson.timeslot === "WED")}
+                                 lessons={yearInfo.lessons}
                 />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <MatchingLessons onSave={onSave()}
+                <MatchingLessons timeslot="THU" onSave={onSave()}
                                  lesson_master={yearInfo.lesson_master}
                                  peeps={yearInfo.people}
-                                 lessons={yearInfo.lessons.filter(lesson => lesson.timeslot === "THU")}
+                                 lessons={yearInfo.lessons}
                 />
             </TabPanel>
             <TabPanel value={value} index={3}>
-                <MatchingLessons onSave={onSave()}
+                <MatchingLessons timeslot="SUN1"
+                                 onSave={onSave()}
                                  lesson_master={yearInfo.lesson_master}
                                  peeps={yearInfo.people}
-                                 lessons={yearInfo.lessons.filter(lesson => lesson.timeslot === "SUN1")}
+                                 lessons={yearInfo.lessons}
                 />
             </TabPanel>
             <TabPanel value={value} index={4}>
-                <MatchingLessons onSave={onSave()}
+                <MatchingLessons timeslot="SUN2" onSave={onSave()}
                                  lesson_master={yearInfo.lesson_master}
                                  peeps={yearInfo.people}
-                                 lessons={yearInfo.lessons.filter(lesson => lesson.timeslot === "SUN2")}
+                                 lessons={yearInfo.lessons}
                 />
             </TabPanel>
             <TabPanel value={value} index={5}>
-                <MatchingLessons onSave={onSave()}
+                <MatchingLessons timeslot="SUN3" onSave={onSave()}
                                  lesson_master={yearInfo.lesson_master}
                                  peeps={yearInfo.people}
                                  lessons={yearInfo.lessons.filter(lesson => lesson.timeslot === "SUN3")}
@@ -132,9 +135,9 @@ export default function BasicTabs() {
         </Box>
     }
 
-    if (yearInfo && yearInfo.length === 0){
-        return <CircularProgress />
-    }else {
+    if (yearInfo && yearInfo.length === 0) {
+        return <CircularProgress/>
+    } else {
         return tabPanel();
     }
 }

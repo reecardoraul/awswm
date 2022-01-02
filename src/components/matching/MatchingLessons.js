@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import {useState} from "react";
 import EditLesson from "./EditLesson";
 
-export default function MatchingLessons({lessons, lesson_master, peeps, onSave, onDelete}) {
+export default function MatchingLessons({timeslot, lessons, lesson_master, peeps, onSave, onDelete}) {
     const [newLesson, setNewLesson] = useState(null);
 
     const fabStyle = {
@@ -15,9 +15,14 @@ export default function MatchingLessons({lessons, lesson_master, peeps, onSave, 
         right: 16,
     };
 
-    const cancelNewLesson = () => { setNewLesson(null) }
-    const newLessonSave = (lesson) => { }
-    const newLessonGo = () => { setNewLesson([]) }
+    const cancelNewLesson = () => {
+        setNewLesson(null)
+    }
+    const newLessonSave = (lesson) => {
+    }
+    const newLessonGo = () => {
+        setNewLesson([])
+    }
 
     const newView = <div>
         <EditLesson lesson={newLesson}
@@ -25,7 +30,7 @@ export default function MatchingLessons({lessons, lesson_master, peeps, onSave, 
                     peeps={peeps}
                     onCancel={cancelNewLesson}
                     onSave={newLessonSave}
-                    />
+        />
 
     </div>
 
@@ -35,7 +40,7 @@ export default function MatchingLessons({lessons, lesson_master, peeps, onSave, 
         </Fab>
 
         {
-            lessons.map(lesson =>
+            lessons.filter(lesson => lesson.timeslot === timeslot).map(lesson =>
                 <LessonMatching key={"lessonMatching-" + lesson.id}
                                 lesson={lesson}
                                 lesson_master={lesson_master.filter(lm => lm.lesson_id === lesson.id)}
@@ -51,6 +56,7 @@ export default function MatchingLessons({lessons, lesson_master, peeps, onSave, 
 }
 
 MatchingLessons.propTypes = {
+    timeslot: PropTypes.object.isRequired,
     lessons: PropTypes.object.isRequired,
     lesson_master: PropTypes.object.isRequired,
     peeps: PropTypes.object.isRequired,
