@@ -49,7 +49,9 @@ export default function PeepLister({setPeep, nextPath, fetchUrl, icon, label}) {
 
     const handleClick = (vol) => {
         setPeep(vol);
-        history.push(nextPath);
+        if (nextPath) {
+            history.push(nextPath);
+        }
     }
 
     let alert;
@@ -97,7 +99,7 @@ export default function PeepLister({setPeep, nextPath, fetchUrl, icon, label}) {
 
 PeepLister.propTypes = {
     setPeep: PropTypes.func.isRequired,
-    nextPath: PropTypes.string.isRequired,
+    nextPath: PropTypes.string,
     fetchUrl: PropTypes.string.isRequired,
     icon: PropTypes.element.isRequired,
     label: PropTypes.string
