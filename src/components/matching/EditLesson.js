@@ -40,9 +40,19 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
 
     return <Card key={"editlessoncard_" + lesson.id} variant={"outlined"} style={{paddingBottom:"3px"}}>
         <CardHeader title={title} style={{paddingBottom:"2px"}}/>
-        <CardContent style={{padding:"5px"}}>
-            <Typography sx={{fontSize: 14}} color="text.secondary">Lesson Type</Typography>
-            <RadioGroup>
+        <CardContent>
+            <Typography sx={{fontSize: 18}} color="text.secondary">Timeslot</Typography>
+            <RadioGroup row={true}>
+                <FormControlLabel value="TUE" control={<Radio/>} label="Tuesday"/>
+                <FormControlLabel value="WED" control={<Radio/>} label="Wednesday"/>
+                <FormControlLabel value="THU" control={<Radio/>} label="Thursday"/>
+                <FormControlLabel value="SUN1" control={<Radio/>} label="Sunday 1"/>
+                <FormControlLabel value="SUN2" control={<Radio/>} label="Sunday 2"/>
+                <FormControlLabel value="SUN3" control={<Radio/>} label="Sunday 3"/>
+            </RadioGroup>
+            <br/>
+            <Typography sx={{fontSize: 18}} color="text.secondary">Lesson Type</Typography>
+            <RadioGroup row={true}>
                 <FormControlLabel value="BI" control={<Radio/>} label="Bi-Ski"/>
                 <FormControlLabel value="MONO" control={<Radio/>} label="Moni-Ski"/>
                 <FormControlLabel value="STANDUP" control={<Radio/>} label="Standup"/>
