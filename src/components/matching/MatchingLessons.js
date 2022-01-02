@@ -3,18 +3,37 @@ import PropTypes from 'prop-types';
 import LessonMatching from "./LessonMatching";
 import Fab from "@mui/material/Fab";
 import AddIcon from '@mui/icons-material/Add';
+import {useState} from "react";
+import EditLesson from "./EditLesson";
 
 export default function MatchingLessons({lessons, lesson_master, peeps, onSave, onDelete}) {
+    const [newLesson, setNewLesson] = useState(null);
+
     const fabStyle = {
         position: 'absolute',
         top: 120,
         right: 16,
     };
 
-    return <div>
-        <Fab sx={fabStyle} color="primary" aria-label="Add Lesson">
+    const cancelNewLesson = () => { setNewLesson(null) }
+    const newLessonSave = (lesson) => { }
+    const newLessonGo = () => { setNewLesson([]) }
+
+    const newView = <div>
+        <EditLesson lesson={newLesson}
+                    lesson_master={[]}
+                    peeps={peeps}
+                    onCancel={cancelNewLesson}
+                    onSave={newLessonSave}
+                    />
+
+    </div>
+
+    const regularView = <div>
+        <Fab sx={fabStyle} color="primary" aria-label="Add Lesson" onClick={newLessonGo}>
             <AddIcon/>
         </Fab>
+
         {
             lessons.map(lesson =>
                 <LessonMatching key={"lessonMatching-" + lesson.id}
@@ -28,6 +47,7 @@ export default function MatchingLessons({lessons, lesson_master, peeps, onSave, 
         }
     </div>
 
+    return newLesson ? newView : regularView;
 }
 
 MatchingLessons.propTypes = {
