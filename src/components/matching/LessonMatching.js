@@ -39,28 +39,16 @@ export default function LessonMatching({lesson, lesson_master, peeps, onSave, on
 
     const subheader = [].concat(...athTiles, ...volTiles);
 
-    let rightAlignItem = {
-        marginLeft: "auto",
-        marginRight: "20px"
-    }
-
-    let leftAlignItem = {
-        marginRight: "auto",
-        marginLeft: "20px"
-    }
-
-    return <Card key={"lessoncard_" + lesson.id} variant={"outlined"} style={{paddingBottom:"3px"}}>
-        <CardHeader title={lesson.ltype} style={{paddingBottom:"2px"}}
-        >
-        </CardHeader>
+   return <Card key={"lessoncard_" + lesson.id} variant={"outlined"} style={{paddingBottom:"3px"}}>
+        <CardHeader title={lesson.ltype} style={{paddingBottom:"2px"}}/>
         <CardContent style={{padding:"5px"}}>
             {subheader}
         </CardContent>
         <CardActions disableSpacing style={{ width: '98%', justifyContent: 'flex-end'}}>
-            <IconButton onClick={deleteLesson} className={leftAlignItem}>
+            <IconButton onClick={deleteLesson}>
                 <DeleteIcon color={"action"} fontSize={'large'}/>
             </IconButton>
-            <IconButton  className={rightAlignItem}>
+            <IconButton>
                 <PersonAddIcon color={"action"} fontSize={'large'}/>
             </IconButton>
         </CardActions>
