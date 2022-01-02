@@ -1,22 +1,58 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Card, CardContent, CardHeader, Typography} from "@mui/material";
 
 import PropTypes from "prop-types";
-import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
-import DownhillSkiingIcon from '@mui/icons-material/DownhillSkiing';
+
 import PeepTile from "./PeepTile";
 import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
-import SaveIcon from '@mui/icons-material/Save';
-import CancelIcon from '@mui/icons-material/Cancel';
+
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
+import {useFormik} from "formik";
+import Backdrop from "@mui/material/Backdrop";
+import PeepLister from "../PeepLister";
+
+import IconButton from "@mui/material/IconButton";
+import SaveIcon from '@mui/icons-material/Save';
+import CancelIcon from '@mui/icons-material/Cancel';
+import PersonIcon from '@mui/icons-material/Person';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
+import DownhillSkiingIcon from '@mui/icons-material/DownhillSkiing';
+
+const volunteer = "volunteer";
+const coordinator = "coordinator";
+const athlete = "student";
+const volunteerIcon = <VolunteerActivismIcon/>
+const athleteIcon = <DownhillSkiingIcon/>
+const personIcon = <PersonIcon/>
 
 export default function EditLesson({lesson, lesson_master, peeps, onSave, onCancel}) {
+    const [lessonPeeps, setLessonPeeps] = useState(lesson_master);
+    const [peepSearchOpen, setPeepSearchOpen] = useState(false);
+
+    const handleClose = () => {
+        setPeepSearchOpen(false);
+    };
+    const handleToggle = () => {
+        setPeepSearchOpen(!peepSearchOpen);
+    };
+
+    const formik = useFormik({
+        enableReinitialize: true,
+        initialValues: {
+            id: lesson.id ? lesson.id : '',
+            ltype: lesson.ltype ? lesson.ltype : '',
+            timeslot: lesson.timeslot ? lesson.timeslot : ''
+
+        },
+        onSubmit: (values) => {
+            alert(JSON.stringify(values, null, 2));
+        },
+    })
+
     const title = lesson.id ? lesson.ltype : "New Lesson";
-    const volunteerIcon = <VolunteerActivismIcon/>
-    const athleteIcon = <DownhillSkiingIcon/>
 
     const getMasterPerson = (master_id) => {
         let retval = peeps.filter(person => person.id === master_id);
@@ -27,8 +63,10 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
             Window.alert("Unknown ID " + master_id);
     };
 
-    const volunteers = lesson_master.filter(peep => peep.role === "VOLUNTEER");
-    const athletes = lesson_master.filter(peep => peep.role === "STUDENT");
+    const volunteers = lessonPeeps.filter(peep => {
+        return peep.role.toLowerCase() === volunteer || peep.role.toLowerCase() === coordinator;
+    });
+    const athletes = lessonPeeps.filter(peep => peep.role.toLowerCase() === athlete);
 
     const volTiles = volunteers.map(peep => <PeepTile id={"l" + lesson.id + "m" + peep.id + "t"}
                                                       peep={getMasterPerson(peep.master_id)}
@@ -38,11 +76,29 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
 
     const peepTiles = [].concat(...athTiles, ...volTiles);
 
-    return <Card key={"editlessoncard_" + lesson.id} variant={"outlined"} style={{paddingBottom:"3px"}}>
-        <CardHeader title={title} style={{paddingBottom:"2px"}}/>
+    const addPeepToLesson = (peep) => {
+        let newPeeps = [...lessonPeeps];
+        let newPeep = { "master_id" : peep.id, "role" : peep.role, "lesson_id": lesson.id };
+        newPeeps.push(newPeep);
+        setLessonPeeps( newPeeps );
+    }
+
+    return <Card key={"editlessoncard_" + lesson.id} variant={"outlined"} style={{paddingBottom: "3px"}}>
+        <Backdrop
+            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={peepSearchOpen}
+            onClick={handleClose}
+        >
+            <PeepLister fetchUrl='/volunteers' nextPath='volunteer' setPeep={addPeepToLesson} label="Add Person" icon={personIcon}/>
+        </Backdrop>
+
+        <CardHeader title={title} style={{paddingBottom: "2px"}}/>
         <CardContent>
+          <form onSubmit={formik.handleSubmit}>
             <Typography sx={{fontSize: 18}} color="text.secondary">Timeslot</Typography>
-            <RadioGroup row={true}>
+            <RadioGroup aria-label="timeslot" name="timeslot"
+                        value={formik.values.timeslot} onChange={formik.handleChange}
+                        row={true} aria-required={true}>
                 <FormControlLabel value="TUE" control={<Radio/>} label="Tuesday"/>
                 <FormControlLabel value="WED" control={<Radio/>} label="Wednesday"/>
                 <FormControlLabel value="THU" control={<Radio/>} label="Thursday"/>
@@ -52,20 +108,26 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
             </RadioGroup>
             <br/>
             <Typography sx={{fontSize: 18}} color="text.secondary">Lesson Type</Typography>
-            <RadioGroup row={true}>
+            <RadioGroup aria-label="Lesson Type" name="ltype"
+                        value={formik.values.ltype} onChange={formik.handleChange}
+                        row={true} aria-required={"true"}>
                 <FormControlLabel value="BI" control={<Radio/>} label="Bi-Ski"/>
                 <FormControlLabel value="MONO" control={<Radio/>} label="Moni-Ski"/>
                 <FormControlLabel value="STANDUP" control={<Radio/>} label="Standup"/>
             </RadioGroup>
             <br/>
-            { peepTiles }
+              <IconButton onClick={handleToggle}>
+                  <PersonAddIcon color={"action"} fontSize={'large'}/>
+              </IconButton>
+            {peepTiles}
+          </form>
         </CardContent>
-        <CardActions disableSpacing style={{ width: '98%', justifyContent: 'flex-end'}}>
+        <CardActions disableSpacing style={{width: '98%', justifyContent: 'flex-end'}}>
             <IconButton onClick={onCancel}>
                 <CancelIcon color={"action"} fontSize={'large'}/>
             </IconButton>
             <IconButton onClick={onSave}>
-                <SaveIcon color={"action"} fontSize={'large'}/>
+                <SaveIcon color={"disabled"} fontSize={'large'}/>
             </IconButton>
         </CardActions>
     </Card>
