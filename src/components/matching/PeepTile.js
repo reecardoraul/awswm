@@ -1,16 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Avatar, Typography} from "@mui/material";
-import Card from "@mui/material/Card";
+import Paper from "@mui/material/Paper";
 import CardHeader from "@mui/material/CardHeader";
 
 export default function PeepTile({peep, icon}) {
-    return <Card>
+    return <Paper variant="outlined" style={{display: "inline-block", margin: "3px"}}>
         <CardHeader
             avatar={<Avatar>{icon}</Avatar>}
-           title = {peep.lastname + ", " + peep.firstname}
+            title={
+                <Typography variant='caption' sx={{fontSize: 12}} color="text.secondary" gutterBottom>
+                    {peep.lastname + ", " + peep.firstname}
+                </Typography>
+            }
         />
-    </Card>
+    </Paper>
 }
 
 PeepTile.propTypes = {

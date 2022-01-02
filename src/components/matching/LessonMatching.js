@@ -1,16 +1,24 @@
 import React, {useState} from 'react';
-import {Card, CardActionArea, CardContent, CardHeader, Collapse, IconButton} from "@mui/material";
+import {Card, CardActionArea, CardContent, CardHeader} from "@mui/material";
 
 import PropTypes from "prop-types";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import DownhillSkiingIcon from '@mui/icons-material/DownhillSkiing';
+import DeleteIcon from '@mui/icons-material/Delete';
 import PeepTile from "./PeepTile";
+import CardActions from "@mui/material/CardActions";
+import IconButton from "@mui/material/IconButton";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
-export default function LessonMatching({lesson, lesson_master, peeps, onSave}) {
+export default function LessonMatching({lesson, lesson_master, peeps, onSave, onDelete}) {
     const volunteers = lesson_master.filter(peep => peep.role === "VOLUNTEER");
 
     let volunteerIcon = <VolunteerActivismIcon/>;
     let athleteIcon = <DownhillSkiingIcon/>;
+
+    const deleteLesson = () => {
+        onDelete(lesson.id)
+    }
 
     const getMasterPerson = (master_id) => {
         let retval = peeps.filter(person => person.id === master_id);
@@ -18,7 +26,7 @@ export default function LessonMatching({lesson, lesson_master, peeps, onSave}) {
         if (retval.length === 1)
             return retval[0];
         else
-            Window.alert("Uknown ID " + master_id);
+            Window.alert("Unknown ID " + master_id);
     };
 
     const athletes = lesson_master.filter(peep => peep.role === "STUDENT");
@@ -31,11 +39,31 @@ export default function LessonMatching({lesson, lesson_master, peeps, onSave}) {
 
     const subheader = [].concat(...athTiles, ...volTiles);
 
-    return <Card key={"lessoncard_" + lesson.id} variant={"outlined"}>
-        <CardHeader title={lesson.ltype}
-                    subheader={subheader}
+    let rightAlignItem = {
+        marginLeft: "auto",
+        marginRight: "20px"
+    }
+
+    let leftAlignItem = {
+        marginRight: "auto",
+        marginLeft: "20px"
+    }
+
+    return <Card key={"lessoncard_" + lesson.id} variant={"outlined"} style={{paddingBottom:"3px"}}>
+        <CardHeader title={lesson.ltype} style={{paddingBottom:"2px"}}
         >
         </CardHeader>
+        <CardContent style={{padding:"5px"}}>
+            {subheader}
+        </CardContent>
+        <CardActions disableSpacing style={{ width: '98%', justifyContent: 'flex-end'}}>
+            <IconButton onClick={deleteLesson} className={leftAlignItem}>
+                <DeleteIcon color={"action"} fontSize={'large'}/>
+            </IconButton>
+            <IconButton  className={rightAlignItem}>
+                <PersonAddIcon color={"action"} fontSize={'large'}/>
+            </IconButton>
+        </CardActions>
     </Card>
 }
 
@@ -43,5 +71,6 @@ LessonMatching.propTypes = {
     lesson: PropTypes.object.isRequired,
     lesson_master: PropTypes.object.isRequired,
     peeps: PropTypes.object.isRequired,
-    onSave: PropTypes.func.isRequired
+    onSave: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired
 }
