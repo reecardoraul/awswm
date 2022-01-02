@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Box from "@mui/material/Box";
 import {Avatar, Typography} from "@mui/material";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
 
-export default function PeepTile({peep,icon}) {
-    return <Box>
-        <Avatar>{icon}</Avatar>
-        <Typography>{peep.lastname + ", " + peep.firstname}</Typography>
-    </Box>
+export default function PeepTile({peep, icon}) {
+    return <Card>
+        <CardHeader
+            avatar={<Avatar>{icon}</Avatar>}
+           title = {peep.lastname + ", " + peep.firstname}
+        />
+    </Card>
 }
 
 PeepTile.propTypes = {
