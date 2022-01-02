@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Card, CardActionArea, CardContent, CardHeader} from "@mui/material";
+import React from 'react';
+import {Card, CardContent, CardHeader} from "@mui/material";
 
 import PropTypes from "prop-types";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
