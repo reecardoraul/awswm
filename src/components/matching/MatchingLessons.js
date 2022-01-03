@@ -6,7 +6,7 @@ import Fab from "@mui/material/Fab";
 import AddIcon from '@mui/icons-material/Add';
 import {useState} from "react";
 import EditLesson from "./EditLesson";
-import {duration} from "@mui/material";
+import {CardActionArea, duration} from "@mui/material";
 
 export default function MatchingLessons({timeslot, lessons, lesson_master, peeps, onSave, onDelete}) {
     const [current_lesson, setNewLesson] = useState(null);
@@ -24,7 +24,10 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
 
     const editView = <div>
         <EditLesson lesson={current_lesson}
-                    lesson_master={[]}
+                    lesson_master={
+                        (current_lesson && current_lesson.id) ? lesson_master.filter( lm => lm.lesson_id === current_lesson.id )
+                        :[]
+                    }
                     peeps={peeps}
                     onCancel={cancelNewLesson}
                     onSave={newLessonSave}
@@ -58,12 +61,16 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
 
         {
             lessons.filter(lesson => lesson.timeslot === timeslot).map(lesson =>
+                <CardActionArea
+                    onClick={() => setNewLesson(lesson)}
+                >
                 <LessonMatching key={"lessonMatching-" + lesson.id}
                                 lesson={lesson}
                                 lesson_master={lesson_master.filter(lm => lm.lesson_id === lesson.id)}
                                 peeps={peeps}
                                 onDelete={onDelete}
                 />
+                </CardActionArea>
             )
         }
     </div>
