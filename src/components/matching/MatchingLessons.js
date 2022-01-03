@@ -37,6 +37,7 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
         bottom: 20,
         left: 'auto',
         position: 'fixed',
+
     };
 
 
@@ -47,7 +48,8 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
             timeout={duration.enteringScreen}
             unmountOnExit
         >
-            <Fab color="primary" aria-label="Add Lesson" onClick={newLessonGo}>
+            <Fab color="primary" aria-label="Add Lesson" onClick={newLessonGo} variant="extended">
+                Add Lesson
                 <AddIcon/>
             </Fab>
         </Zoom>
