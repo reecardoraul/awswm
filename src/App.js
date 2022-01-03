@@ -12,6 +12,7 @@ import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import SettingsIcon from '@mui/icons-material/Settings';
 import IconButton from "@mui/material/IconButton";
+import {isMobile} from "react-device-detect";
 
 import {
     BrowserRouter as Router,
@@ -40,13 +41,13 @@ function App() {
     let athleteIcon = <DownhillSkiingIcon/>;
     let title = "AWSWM Admin";
 
+    let titleStyle = isMobile ? {position: "absolute", bottom: "2vmin"} : {position: "absolute", bottom: "1vmin"};
+
     return <Router>
         <div>
             <header className='App-header'>
                 <div style={{position: "relative", width: "100%"}}>
-                    <div style={{position: "absolute", bottom: "2vmin"}}>
-                    {title}
-                    </div>
+                    <div style={titleStyle}>{title}</div>
                     <div className='App-header-buttons'>
                         <Link to='/volunteers'><IconButton><VolunteerActivismIcon style={{fill: "white"}}/></IconButton></Link>
                         <Link to='/athletes'><IconButton><DownhillSkiingIcon style={{fill: "white"}}/></IconButton></Link>
