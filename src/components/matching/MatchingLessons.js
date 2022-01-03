@@ -9,7 +9,7 @@ import EditLesson from "./EditLesson";
 import {duration} from "@mui/material";
 
 export default function MatchingLessons({timeslot, lessons, lesson_master, peeps, onSave, onDelete}) {
-    const [newLesson, setNewLesson] = useState(null);
+    const [current_lesson, setNewLesson] = useState(null);
 
     const cancelNewLesson = () => {
         setNewLesson(null)
@@ -22,8 +22,8 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
         setNewLesson({timeslot: timeslot})
     }
 
-    const newView = <div>
-        <EditLesson lesson={newLesson}
+    const editView = <div>
+        <EditLesson lesson={current_lesson}
                     lesson_master={[]}
                     peeps={peeps}
                     onCancel={cancelNewLesson}
@@ -68,7 +68,7 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
         }
     </div>
 
-    return newLesson ? newView : regularView;
+    return current_lesson ? editView : regularView;
 }
 
 MatchingLessons.propTypes = {
