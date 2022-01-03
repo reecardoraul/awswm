@@ -10,25 +10,22 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import {useFormik} from "formik";
-import Backdrop from "@mui/material/Backdrop";
-import PeepLister from "../PeepLister";
 
 import IconButton from "@mui/material/IconButton";
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
-import PersonIcon from '@mui/icons-material/Person';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import DownhillSkiingIcon from '@mui/icons-material/DownhillSkiing';
 import MatchingPeepSearch from "./MatchingPeepSearch";
 import Modal from "@mui/material/Modal";
+import Button from "@mui/material/Button";
 
 const volunteer = "volunteer";
 const coordinator = "coordinator";
 const athlete = "student";
 const volunteerIcon = <VolunteerActivismIcon/>
 const athleteIcon = <DownhillSkiingIcon/>
-const personIcon = <PersonIcon/>
 
 export default function EditLesson({lesson, lesson_master, peeps, onSave, onCancel}) {
     const [lessonPeeps, setLessonPeeps] = useState(lesson_master);
@@ -61,8 +58,6 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
 
         if (retval.length === 1)
             return retval[0];
-        else
-            Window.alert("Unknown ID " + master_id);
     };
 
     const volunteers = lessonPeeps.filter(peep => {
@@ -127,10 +122,10 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
                 <FormControlLabel value="STANDUP" control={<Radio/>} label="Standup"/>
             </RadioGroup>
             <br/>
-              <IconButton onClick={handleToggle}>
-                  <PersonAddIcon color={"action"} fontSize={'large'}/>
-              </IconButton>
+
             {peepTiles}
+              <Button onClick={handleToggle} variant="outlined" startIcon={<PersonAddIcon fontSize={'large'}/>}>Add Person
+              </Button>
           </form>
         </CardContent>
         <CardActions disableSpacing style={{width: '98%', justifyContent: 'flex-end'}}>
