@@ -16,6 +16,7 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
     }
     const newLessonSave = (lesson) => {
         onSave(lesson);
+        setNewLesson(null)
     }
     const newLessonGo = () => {
         setNewLesson([])
