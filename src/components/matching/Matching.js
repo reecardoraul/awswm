@@ -70,7 +70,7 @@ export default function BasicTabs() {
     };
 
     const onSave = (saved) => {
-
+        alert( "MATCHING SUBMISSION - " + JSON.stringify(saved));
     }
 
     const tabPanel = () => {
@@ -90,21 +90,21 @@ export default function BasicTabs() {
             <TabPanel value={value} index={0}>
                 <MatchingLessons
                     timeslot="TUE"
-                    onSave={onSave()}
+                    onSave={onSave}
                     lesson_master={yearInfo.lesson_master}
                     peeps={yearInfo.people}
                     lessons={yearInfo.lessons.filter(lesson => lesson.timeslot === "TUE")}
                 />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <MatchingLessons timeslot="WED" onSave={onSave()}
+                <MatchingLessons timeslot="WED" onSave={onSave}
                                  lesson_master={yearInfo.lesson_master}
                                  peeps={yearInfo.people}
                                  lessons={yearInfo.lessons}
                 />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <MatchingLessons timeslot="THU" onSave={onSave()}
+                <MatchingLessons timeslot="THU" onSave={onSave}
                                  lesson_master={yearInfo.lesson_master}
                                  peeps={yearInfo.people}
                                  lessons={yearInfo.lessons}
@@ -112,21 +112,21 @@ export default function BasicTabs() {
             </TabPanel>
             <TabPanel value={value} index={3}>
                 <MatchingLessons timeslot="SUN1"
-                                 onSave={onSave()}
+                                 onSave={onSave}
                                  lesson_master={yearInfo.lesson_master}
                                  peeps={yearInfo.people}
                                  lessons={yearInfo.lessons}
                 />
             </TabPanel>
             <TabPanel value={value} index={4}>
-                <MatchingLessons timeslot="SUN2" onSave={onSave()}
+                <MatchingLessons timeslot="SUN2" onSave={onSave}
                                  lesson_master={yearInfo.lesson_master}
                                  peeps={yearInfo.people}
                                  lessons={yearInfo.lessons}
                 />
             </TabPanel>
             <TabPanel value={value} index={5}>
-                <MatchingLessons timeslot="SUN3" onSave={onSave()}
+                <MatchingLessons timeslot="SUN3" onSave={onSave}
                                  lesson_master={yearInfo.lesson_master}
                                  peeps={yearInfo.people}
                                  lessons={yearInfo.lessons.filter(lesson => lesson.timeslot === "SUN3")}

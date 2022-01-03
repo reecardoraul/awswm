@@ -99,8 +99,9 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
         </Modal>
 
         <CardHeader title={title} style={{paddingBottom: "2px"}}/>
+        <form onSubmit={formik.handleSubmit}>
         <CardContent>
-          <form onSubmit={formik.handleSubmit}>
+
             <Typography sx={{fontSize: 18}} color="text.secondary">Timeslot</Typography>
             <RadioGroup aria-label="timeslot" name="timeslot"
                         value={formik.values.timeslot} onChange={formik.handleChange}
@@ -126,16 +127,17 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
             {peepTiles}
               <Button onClick={handleToggle} variant="outlined" startIcon={<PersonAddIcon fontSize={'large'}/>}>Add Person
               </Button>
-          </form>
+
         </CardContent>
         <CardActions disableSpacing style={{width: '98%', justifyContent: 'flex-end'}}>
             <IconButton onClick={onCancel}>
                 <CancelIcon color={"action"} fontSize={'large'}/>
             </IconButton>
-            <IconButton onClick={onSave} disabled={!saveable}>
+            <IconButton disabled={!saveable} type={"submit"}>
                 <SaveIcon color={saveable ? "primary" : "disabled"} fontSize={'large'}/>
             </IconButton>
         </CardActions>
+        </form>
     </Card>
 }
 
