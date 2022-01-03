@@ -8,13 +8,28 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import MatchingLessons from "./MatchingLessons";
 import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from "@mui/material/Backdrop";
 
-async function getYearInfo(set_lessons) {
+async function getYearInfo(set_lessons, set_loading) {
     axios.get("/yearinfo")
         .catch(error => alert(error.message))
         .then(data => {
             if (data != null) {
                 set_lessons(data.data);
+                set_loading(false);
+            } else {
+                alert("Unable to fetch Lessons!");
+            }
+        });
+}
+
+async function add_new_lesson(lesson, callback) {
+    let wrapper = { lesson: lesson };
+    axios.post("/lessons", wrapper )
+        .catch(error => alert(error.message))
+        .then(data => {
+            if (data != null) {
+                callback(data.data);
             } else {
                 alert("Unable to fetch Lessons!");
             }
@@ -55,26 +70,43 @@ function a11yProps(index) {
 }
 
 export default function BasicTabs() {
+    const [loading, set_loading] = React.useState(true);
     const [value, setValue] = React.useState(0);
 
     const [yearInfo, setYearInfo] = useState([]);
 
     useEffect(() => {
-        if (yearInfo && yearInfo.length === 0)
-            getYearInfo(setYearInfo)
-    }, [yearInfo]);
+        if (yearInfo && yearInfo.length === 0) {
+            set_loading(true);
+            getYearInfo(setYearInfo, set_loading)
+        }
+    }, [yearInfo, loading]);
 
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
+    const afterLessonSaved = () => {
+        getYearInfo(setYearInfo, set_loading);
+    }
+
+
     const onSave = (saved) => {
-        alert( "MATCHING SUBMISSION - " + JSON.stringify(saved));
+        saved.year = yearInfo.year;
+        alert("MATCHING SUBMISSION - " + JSON.stringify(saved));
+        set_loading(true);
+        add_new_lesson(saved, afterLessonSaved)
     }
 
     const tabPanel = () => {
         return <Box sx={{width: '100%'}}>
+            <Backdrop
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+                open={loading}
+            >
+                <CircularProgress color="inherit"/>
+            </Backdrop>
             <Typography variant='caption' sx={{fontSize: 24}} color="text.secondary" gutterBottom>Matching
                 - {yearInfo.year}</Typography>
             <Box sx={{borderBottom: 1, borderColor: 'divider'}}>

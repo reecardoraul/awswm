@@ -4,21 +4,13 @@ import {Card, CardContent, CardHeader} from "@mui/material";
 import PropTypes from "prop-types";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import DownhillSkiingIcon from '@mui/icons-material/DownhillSkiing';
-import DeleteIcon from '@mui/icons-material/Delete';
 import PeepTile from "./PeepTile";
-import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
-import EditIcon from '@mui/icons-material/Edit';
 
-export default function LessonMatching({lesson, lesson_master, peeps, onDelete}) {
+export default function LessonMatching({lesson, lesson_master, peeps}) {
     const volunteers = lesson_master.filter(peep => peep.role === "VOLUNTEER");
 
     let volunteerIcon = <VolunteerActivismIcon/>;
     let athleteIcon = <DownhillSkiingIcon/>;
-
-    const deleteLesson = () => {
-        onDelete(lesson.id)
-    }
 
     const getMasterPerson = (master_id) => {
         let retval = peeps.filter(person => person.id === master_id);
@@ -41,15 +33,6 @@ export default function LessonMatching({lesson, lesson_master, peeps, onDelete})
 
    return <Card key={"lessoncard_" + lesson.id} variant={"outlined"} style={{paddingBottom:"3px"}}>
         <CardHeader title={lesson.ltype} style={{paddingBottom:"2px"}}
-                    action={<span>
-                        <IconButton onClick={deleteLesson}>
-                <DeleteIcon color={"action"} fontSize={'large'}/>
-            </IconButton>
-            <IconButton>
-                <EditIcon color={"action"} fontSize={'large'}/>
-            </IconButton>
-                    </span>
-                        }
         />
         <CardContent style={{padding:"5px"}}>
             {subheader}
@@ -61,6 +44,5 @@ export default function LessonMatching({lesson, lesson_master, peeps, onDelete})
 LessonMatching.propTypes = {
     lesson: PropTypes.object.isRequired,
     lesson_master: PropTypes.object.isRequired,
-    peeps: PropTypes.object.isRequired,
-    onDelete: PropTypes.func.isRequired
+    peeps: PropTypes.object.isRequired
 }
