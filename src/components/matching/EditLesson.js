@@ -78,6 +78,9 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
 
     const peepTiles = [].concat(...athTiles, ...volTiles);
 
+    const saveable = formik.values.ltype && formik.values.timeslot && lessonPeeps.length > 0;
+
+
     const addPeepToLesson = (peep) => {
         let newPeeps = [...lessonPeeps];
         let newPeep = { "master_id" : peep.id, "role" : peep.role, "lesson_id": lesson.id };
@@ -134,8 +137,8 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
             <IconButton onClick={onCancel}>
                 <CancelIcon color={"action"} fontSize={'large'}/>
             </IconButton>
-            <IconButton onClick={onSave}>
-                <SaveIcon color={"disabled"} fontSize={'large'}/>
+            <IconButton onClick={onSave} disabled={!saveable}>
+                <SaveIcon color={saveable ? "primary" : "disabled"} fontSize={'large'}/>
             </IconButton>
         </CardActions>
     </Card>
