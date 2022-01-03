@@ -44,7 +44,7 @@ export default function LessonMatching({lesson, lesson_master, peeps, onSave, on
         <CardContent style={{padding:"5px"}}>
             {subheader}
         </CardContent>
-        <CardActions disableSpacing style={{ width: '98%', justifyContent: 'flex-end'}}>
+        <CardActions disableSpacing style={{ width: '98%', justifyContent: 'flex-start'}}>
             <IconButton onClick={deleteLesson}>
                 <DeleteIcon color={"action"} fontSize={'large'}/>
             </IconButton>
