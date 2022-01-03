@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from "prop-types";
 import PeepLister from "../PeepLister";
-import {CardContent, CardHeader, Paper} from "@mui/material";
+import {CardContent, Paper} from "@mui/material";
 import PersonIcon from '@mui/icons-material/Person';
 
 export default function MatchingPeepSearch({setPeep, season, timeslot, people, person_lesson}) {
