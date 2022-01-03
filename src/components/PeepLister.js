@@ -66,7 +66,7 @@ export default function PeepLister({setPeep, nextPath, fetchUrl, icon, label, pe
         const search_string = search.toLowerCase();
         return peep.firstname.toLowerCase().includes(search_string) ||
             peep.lastname.toLowerCase().includes(search_string) ||
-            peep.phone_primary.toLowerCase().includes(search_string);
+            (typeof peep.phone_primary !== "undefined" && peep.phone_primary.toLowerCase().includes(search_string));
     }) : peeps;
 
     return (

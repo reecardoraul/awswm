@@ -5,14 +5,11 @@ import {CardContent, CardHeader, Paper} from "@mui/material";
 import PersonIcon from '@mui/icons-material/Person';
 
 export default function MatchingPeepSearch({setPeep, season, timeslot, people, person_lesson}) {
-
-    const cardTitle = "Search People";
     const personIcon = <PersonIcon/>
 
     return <Paper>
-        <CardHeader title={cardTitle}></CardHeader>
         <CardContent>
-            <PeepLister people={people} setPeep={setPeep} label="Add Person" icon={personIcon}/>
+            <PeepLister people={people} setPeep={setPeep} label="Add People" icon={personIcon}/>
         </CardContent>
     </Paper>
 }

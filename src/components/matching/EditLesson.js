@@ -21,6 +21,7 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import DownhillSkiingIcon from '@mui/icons-material/DownhillSkiing';
 import MatchingPeepSearch from "./MatchingPeepSearch";
+import Modal from "@mui/material/Modal";
 
 const volunteer = "volunteer";
 const coordinator = "coordinator";
@@ -82,20 +83,22 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
         let newPeep = { "master_id" : peep.id, "role" : peep.role, "lesson_id": lesson.id };
         newPeeps.push(newPeep);
         setLessonPeeps( newPeeps );
+        setPeepSearchOpen(false);
     }
 
     return <Card key={"editlessoncard_" + lesson.id} variant={"outlined"} style={{paddingBottom: "3px"}}>
-        <Backdrop
-            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 , overflow: 'scroll'}}
+        <Modal
             open={peepSearchOpen}
-            onClick={handleClose}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
         >
-            <MatchingPeepSearch
-                people={peeps}
-                setPeep={addPeepToLesson}
-                person_lesson={lesson_master}
-            />
-        </Backdrop>
+                <MatchingPeepSearch
+                    people={peeps}
+                    setPeep={addPeepToLesson}
+                    person_lesson={lesson_master}
+                />
+        </Modal>
 
         <CardHeader title={title} style={{paddingBottom: "2px"}}/>
         <CardContent>
