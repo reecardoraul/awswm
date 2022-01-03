@@ -10,7 +10,7 @@ import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from '@mui/icons-material/Edit';
 
-export default function LessonMatching({lesson, lesson_master, peeps, onSave, onDelete}) {
+export default function LessonMatching({lesson, lesson_master, peeps, onDelete}) {
     const volunteers = lesson_master.filter(peep => peep.role === "VOLUNTEER");
 
     let volunteerIcon = <VolunteerActivismIcon/>;
@@ -59,6 +59,5 @@ LessonMatching.propTypes = {
     lesson: PropTypes.object.isRequired,
     lesson_master: PropTypes.object.isRequired,
     peeps: PropTypes.object.isRequired,
-    onSave: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired
 }

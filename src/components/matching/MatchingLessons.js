@@ -15,6 +15,7 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
         setNewLesson(null)
     }
     const newLessonSave = (lesson) => {
+        onSave(lesson);
     }
     const newLessonGo = () => {
         setNewLesson([])
@@ -60,7 +61,6 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
                                 lesson={lesson}
                                 lesson_master={lesson_master.filter(lm => lm.lesson_id === lesson.id)}
                                 peeps={peeps}
-                                onSave={onSave}
                                 onDelete={onDelete}
                 />
             )

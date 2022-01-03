@@ -47,7 +47,7 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
 
         },
         onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2));
+            onSave(values);
         },
     })
 
