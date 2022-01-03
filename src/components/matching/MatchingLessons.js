@@ -11,12 +11,6 @@ import {duration} from "@mui/material";
 export default function MatchingLessons({timeslot, lessons, lesson_master, peeps, onSave, onDelete}) {
     const [newLesson, setNewLesson] = useState(null);
 
-    const fabStyle = {
-        position: 'absolute',
-        top: 120,
-        right: 16,
-    };
-
     const cancelNewLesson = () => {
         setNewLesson(null)
     }
@@ -36,13 +30,24 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
 
     </div>
 
+    const style = {
+        margin: 0,
+        top: 'auto',
+        right: 20,
+        bottom: 20,
+        left: 'auto',
+        position: 'fixed',
+    };
+
+
     const regularView = <div>
         <Zoom
+            style={style}
             in={true}
             timeout={duration.enteringScreen}
             unmountOnExit
         >
-            <Fab sx={fabStyle} color="primary" aria-label="Add Lesson" onClick={newLessonGo}>
+            <Fab color="primary" aria-label="Add Lesson" onClick={newLessonGo}>
                 <AddIcon/>
             </Fab>
         </Zoom>
