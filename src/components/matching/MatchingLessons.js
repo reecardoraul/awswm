@@ -19,7 +19,7 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
         setNewLesson(null)
     }
     const newLessonGo = () => {
-        setNewLesson([])
+        setNewLesson({timeslot: timeslot})
     }
 
     const newView = <div>
@@ -34,11 +34,11 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
 
     const style = {
         margin: 0,
-        top: 'auto',
+        top: 45,
         right: 20,
-        bottom: 20,
+        bottom: 'auto',
         left: 'auto',
-        position: 'fixed',
+        position: 'absolute',
 
     };
 

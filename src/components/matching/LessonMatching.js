@@ -40,18 +40,21 @@ export default function LessonMatching({lesson, lesson_master, peeps, onDelete})
     const subheader = [].concat(...athTiles, ...volTiles);
 
    return <Card key={"lessoncard_" + lesson.id} variant={"outlined"} style={{paddingBottom:"3px"}}>
-        <CardHeader title={lesson.ltype} style={{paddingBottom:"2px"}}/>
-        <CardContent style={{padding:"5px"}}>
-            {subheader}
-        </CardContent>
-        <CardActions disableSpacing style={{ width: '98%', justifyContent: 'flex-start'}}>
-            <IconButton onClick={deleteLesson}>
+        <CardHeader title={lesson.ltype} style={{paddingBottom:"2px"}}
+                    action={<span>
+                        <IconButton onClick={deleteLesson}>
                 <DeleteIcon color={"action"} fontSize={'large'}/>
             </IconButton>
             <IconButton>
                 <EditIcon color={"action"} fontSize={'large'}/>
             </IconButton>
-        </CardActions>
+                    </span>
+                        }
+        />
+        <CardContent style={{padding:"5px"}}>
+            {subheader}
+        </CardContent>
+
     </Card>
 }
 
