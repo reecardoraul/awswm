@@ -15,48 +15,55 @@ import IconButton from "@mui/material/IconButton";
 
 import {
     BrowserRouter as Router,
-        Switch,
-        Route,
-        Link
+    Switch,
+    Route,
+    Link
 } from "react-router-dom";
 import Timeslots from "./components/settings/Timeslots";
 import Matching from "./components/matching/Matching";
 
 
 axios.defaults.baseURL = config.BASE_PATH;
-axios.defaults.headers.post['Conent-Type']='application/json';
-axios.defaults.withCredentials=true;
+axios.defaults.headers.post['Conent-Type'] = 'application/json';
+axios.defaults.withCredentials = true;
 
 function App() {
-  const [user, setUser] = useState();
-  const [volunteer, setVolunteer] = useState({});
-  const [athlete, setAthlete] = useState({});
+    const [user, setUser] = useState();
+    const [volunteer, setVolunteer] = useState({});
+    const [athlete, setAthlete] = useState({});
 
-  if(!user) {
-     return <Auth setUser={setUser} />
-   }
+    if (!user) {
+        return <Auth setUser={setUser}/>
+    }
 
-  let volunteerIcon = <VolunteerActivismIcon/>;
-  let athleteIcon = <DownhillSkiingIcon/>;
+    let volunteerIcon = <VolunteerActivismIcon/>;
+    let athleteIcon = <DownhillSkiingIcon/>;
+    let title = "AWSWM Admin";
 
-  return <Router>
-          <div>
-              <header className='App-header'>
-                  <div>
-                AWSWM Admin
-                    <Link to='/volunteers'><IconButton><VolunteerActivismIcon style={{fill:"white"}}/></IconButton></Link>
-                    <Link to='/athletes'><IconButton><DownhillSkiingIcon style={{fill:"white"}}/></IconButton></Link>
-                    <Link to='/matching'><IconButton><CompareArrowsIcon style={{fill:"white"}}/></IconButton></Link>
-                    <Link to='/settings'><IconButton><SettingsIcon style={{fill:"white"}}/></IconButton></Link>
-                  </div>
-              </header>
+    return <Router>
+        <div>
+            <header className='App-header'>
+                <div style={{position: "relative", width: "100%"}}>
+                    <div style={{position: "absolute", bottom: "2vmin"}}>
+                    {title}
+                    </div>
+                    <div className='App-header-buttons'>
+                        <Link to='/volunteers'><IconButton><VolunteerActivismIcon style={{fill: "white"}}/></IconButton></Link>
+                        <Link to='/athletes'><IconButton><DownhillSkiingIcon style={{fill: "white"}}/></IconButton></Link>
+                        <Link to='/matching'><IconButton><CompareArrowsIcon style={{fill: "white"}}/></IconButton></Link>
+                        <Link to='/settings'><IconButton><SettingsIcon style={{fill: "white"}}/></IconButton></Link>
+                    </div>
+                </div>
+            </header>
             <Switch>
                 <div className='content'>
                     <Route exact path="/volunteers">
-                        <PeepLister fetchUrl='/volunteers' nextPath='volunteer' setPeep={setVolunteer} label="Volunteers" icon={volunteerIcon}/>
+                        <PeepLister fetchUrl='/volunteers' nextPath='volunteer' setPeep={setVolunteer}
+                                    label="Volunteers" icon={volunteerIcon}/>
                     </Route>
                     <Route exact path="/athletes">
-                        <PeepLister fetchUrl='/students' nextPath='athlete' setPeep={setAthlete} label="Athletes" icon={athleteIcon}/>
+                        <PeepLister fetchUrl='/students' nextPath='athlete' setPeep={setAthlete} label="Athletes"
+                                    icon={athleteIcon}/>
                     </Route>
                     <Route exact path="/volunteer">
                         <Vol volunteer={volunteer}/>
@@ -75,8 +82,8 @@ function App() {
                     </Route>
                 </div>
             </Switch>
-          </div>
-      </Router>
+        </div>
+    </Router>
 }
 
 export default App;

@@ -8,7 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import PeepTile from "./PeepTile";
 import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import EditIcon from '@mui/icons-material/Edit';
 
 export default function LessonMatching({lesson, lesson_master, peeps, onSave, onDelete}) {
     const volunteers = lesson_master.filter(peep => peep.role === "VOLUNTEER");
@@ -49,7 +49,7 @@ export default function LessonMatching({lesson, lesson_master, peeps, onSave, on
                 <DeleteIcon color={"action"} fontSize={'large'}/>
             </IconButton>
             <IconButton>
-                <PersonAddIcon color={"action"} fontSize={'large'}/>
+                <EditIcon color={"action"} fontSize={'large'}/>
             </IconButton>
         </CardActions>
     </Card>

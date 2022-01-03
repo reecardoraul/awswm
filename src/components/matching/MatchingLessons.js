@@ -1,10 +1,12 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import LessonMatching from "./LessonMatching";
+import Zoom from '@mui/material/Zoom';
 import Fab from "@mui/material/Fab";
 import AddIcon from '@mui/icons-material/Add';
 import {useState} from "react";
 import EditLesson from "./EditLesson";
+import {duration} from "@mui/material";
 
 export default function MatchingLessons({timeslot, lessons, lesson_master, peeps, onSave, onDelete}) {
     const [newLesson, setNewLesson] = useState(null);
@@ -35,9 +37,15 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
     </div>
 
     const regularView = <div>
-        <Fab sx={fabStyle} color="primary" aria-label="Add Lesson" onClick={newLessonGo}>
-            <AddIcon/>
-        </Fab>
+        <Zoom
+            in={true}
+            timeout={duration.enteringScreen}
+            unmountOnExit
+        >
+            <Fab sx={fabStyle} color="primary" aria-label="Add Lesson" onClick={newLessonGo}>
+                <AddIcon/>
+            </Fab>
+        </Zoom>
 
         {
             lessons.filter(lesson => lesson.timeslot === timeslot).map(lesson =>
