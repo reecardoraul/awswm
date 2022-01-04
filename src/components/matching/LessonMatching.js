@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, CardContent, CardHeader} from "@mui/material";
+import {Card, CardContent, CardHeader, Typography} from "@mui/material";
 
 import PropTypes from "prop-types";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
@@ -32,9 +32,8 @@ export default function LessonMatching({lesson, lesson_master, peeps}) {
     const subheader = [...athTiles, ...volTiles];
 
    return <Card variant={"outlined"} style={{paddingBottom:"3px"}}>
-        <CardHeader title={lesson.ltype} style={{paddingBottom:"2px"}}
-        />
         <CardContent style={{padding:"5px"}}>
+            <Typography variant='caption' sx={{fontSize: 24, padding: "2px"}} color="text.secondary" gutterBottom >{lesson.ltype} </Typography>
             {subheader}
         </CardContent>
 
