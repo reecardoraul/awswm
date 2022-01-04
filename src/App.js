@@ -50,14 +50,16 @@ function App() {
                     <div style={titleStyle}>{title}</div>
                     <div className='App-header-buttons'>
                         <Link to='/volunteers'><IconButton><VolunteerActivismIcon style={{fill: "white"}}/></IconButton></Link>
-                        <Link to='/athletes'><IconButton><DownhillSkiingIcon style={{fill: "white"}}/></IconButton></Link>
-                        <Link to='/matching'><IconButton><CompareArrowsIcon style={{fill: "white"}}/></IconButton></Link>
+                        <Link to='/athletes'><IconButton><DownhillSkiingIcon
+                            style={{fill: "white"}}/></IconButton></Link>
+                        <Link to='/matching'><IconButton><CompareArrowsIcon
+                            style={{fill: "white"}}/></IconButton></Link>
                         <Link to='/settings'><IconButton><SettingsIcon style={{fill: "white"}}/></IconButton></Link>
                     </div>
                 </div>
             </header>
-            <Switch>
-                <div className='content'>
+            <div className='content'>
+                <Switch>
                     <Route exact path="/volunteers">
                         <PeepLister fetchUrl='/volunteers' nextPath='volunteer' setPeep={setVolunteer}
                                     label="Volunteers" icon={volunteerIcon}/>
@@ -81,8 +83,8 @@ function App() {
                     <Route exact path="/settings">
                         <Timeslots/>
                     </Route>
-                </div>
-            </Switch>
+                </Switch>
+            </div>
         </div>
     </Router>
 }

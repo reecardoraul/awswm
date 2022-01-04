@@ -14,7 +14,7 @@ export default function MatchingPeepSearch({setPeep, season, timeslot, people, p
     </Paper>
 }
 
-PeepLister.propTypes = {
+MatchingPeepSearch.propTypes = {
     setPeep: PropTypes.func.isRequired,
     season: PropTypes.string,
     timeslot: PropTypes.string,
