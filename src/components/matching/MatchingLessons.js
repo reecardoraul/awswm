@@ -7,7 +7,6 @@ import AddIcon from '@mui/icons-material/Add';
 import {useState} from "react";
 import EditLesson from "./EditLesson";
 import {CardActionArea, duration} from "@mui/material";
-import Modal from "@mui/material/Modal";
 import Dialog from "@mui/material/Dialog";
 
 export default function MatchingLessons({timeslot, lessons, lesson_master, peeps, onSave, onDelete}) {
