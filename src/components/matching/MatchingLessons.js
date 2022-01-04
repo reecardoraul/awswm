@@ -7,6 +7,9 @@ import AddIcon from '@mui/icons-material/Add';
 import {useState} from "react";
 import EditLesson from "./EditLesson";
 import {CardActionArea, duration} from "@mui/material";
+import Grow from "@mui/material/Grow";
+import { TransitionGroup } from 'react-transition-group';
+import Modal from "@mui/material/Modal";
 
 export default function MatchingLessons({timeslot, lessons, lesson_master, peeps, onSave, onDelete}) {
     const [current_lesson, setNewLesson] = useState(null);
@@ -22,18 +25,16 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
         setNewLesson({timeslot: timeslot})
     }
 
-    const editView = <div>
-        <EditLesson lesson={current_lesson}
-                    lesson_master={
-                        (current_lesson && current_lesson.id) ? lesson_master.filter( lm => lm.lesson_id === current_lesson.id )
-                        :[]
-                    }
-                    peeps={peeps}
-                    onCancel={cancelNewLesson}
-                    onSave={newLessonSave}
-        />
-
-    </div>
+    const editView =
+            <EditLesson lesson={current_lesson}
+                        lesson_master={
+                            (current_lesson && current_lesson.id) ? lesson_master.filter(lm => lm.lesson_id === current_lesson.id)
+                                : []
+                        }
+                        peeps={peeps}
+                        onCancel={cancelNewLesson}
+                        onSave={newLessonSave}
+            />
 
     const style = {
         margin: 0,
@@ -45,8 +46,14 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
 
     };
 
-
-    const regularView = <div>
+    return <div>
+        <Modal
+            open={!!current_lesson}
+            onClose={cancelNewLesson}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+        >{editView}
+        </Modal>
         <Zoom
             style={style}
             in={true}
@@ -64,18 +71,16 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
                 <CardActionArea
                     onClick={() => setNewLesson(lesson)}
                 >
-                <LessonMatching key={"lessonMatching-" + lesson.id}
-                                lesson={lesson}
-                                lesson_master={lesson_master.filter(lm => lm.lesson_id === lesson.id)}
-                                peeps={peeps}
-                                onDelete={onDelete}
-                />
+                    <LessonMatching key={"lessonMatching-" + lesson.id}
+                                    lesson={lesson}
+                                    lesson_master={lesson_master.filter(lm => lm.lesson_id === lesson.id)}
+                                    peeps={peeps}
+                                    onDelete={onDelete}
+                    />
                 </CardActionArea>
             )
         }
     </div>
-
-    return current_lesson ? editView : regularView;
 }
 
 MatchingLessons.propTypes = {
