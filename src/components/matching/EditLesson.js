@@ -42,16 +42,14 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
         initialValues: {
             id: lesson.id ? lesson.id : '',
             ltype: lesson.ltype ? lesson.ltype : '',
-            timeslot: lesson.timeslot ? lesson.timeslot : ''
-
+            timeslot: lesson.timeslot ? lesson.timeslot : '',
+            year: lesson.year ? lesson.year : ''
         },
         onSubmit: (values) => {
-            values.people = lessonPeeps.map(peep => {
-                return {
+            values.people = lessonPeeps.map(peep => ({
                     master_id: (peep.master_id ? peep.master_id : peep.id),
                     role: peep.role
-                }
-            });
+            }));
             if (values.id === "") {
                 values.id = undefined;
             }

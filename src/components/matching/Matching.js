@@ -31,7 +31,20 @@ async function add_new_lesson(lesson, callback) {
             if (data != null) {
                 callback(data.data);
             } else {
-                alert("Unable to fetch Lessons!");
+                alert("Unable to save new lesson");
+            }
+        });
+}
+
+async function save_lesson(lesson, callback) {
+    let wrapper = { lesson: lesson };
+    axios.put("/lessons/" + lesson.id, wrapper )
+        .catch(error => alert(error.message))
+        .then(data => {
+            if (data != null) {
+                callback(data.data);
+            } else {
+                alert("Unable to update lesson");
             }
         });
 }
@@ -96,7 +109,11 @@ export default function BasicTabs() {
         saved.year = yearInfo.year;
         alert("MATCHING SUBMISSION - " + JSON.stringify(saved));
         set_loading(true);
-        add_new_lesson(saved, afterLessonSaved)
+        if( saved.id ){
+            save_lesson(saved, afterLessonSaved)
+        }else {
+            add_new_lesson(saved, afterLessonSaved)
+        }
     }
 
     const tabPanel = () => {
