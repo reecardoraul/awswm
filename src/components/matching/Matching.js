@@ -107,7 +107,6 @@ export default function BasicTabs() {
 
     const onSave = (saved) => {
         saved.year = yearInfo.year;
-        alert("MATCHING SUBMISSION - " + JSON.stringify(saved));
         set_loading(true);
         if( saved.id ){
             save_lesson(saved, afterLessonSaved)

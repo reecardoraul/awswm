@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Card, CardContent, CardHeader, Typography} from "@mui/material";
+import {Card, CardActionArea, CardContent, CardHeader, Typography} from "@mui/material";
 
 import PropTypes from "prop-types";
 
@@ -71,16 +71,15 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
     });
     const athletes = lessonPeeps.filter(peep => peep.role.toLowerCase() === athlete);
 
-    const volTiles = volunteers.map(peep => <PeepTile id={"l" + lesson.id + "m" + peep.id + "t"}
-                                                      peep={getMasterPerson(peep.master_id)}
-                                                      icon={volunteerIcon}/>);
-    const athTiles = athletes.map(peep => <PeepTile id={"l" + lesson.id + "m" + peep.id + "t"}
-                                                    peep={getMasterPerson(peep.master_id)} icon={athleteIcon}/>);
-
-    const peepTiles = [].concat(...athTiles, ...volTiles);
+    const lessonPeopleSorted = [...athletes,...volunteers]
 
     const saveable = formik.values.ltype && formik.values.timeslot && lessonPeeps.length > 0;
 
+    const peepClicked = (peep) => {
+        let newPeeps = [...lessonPeeps];
+        let filtered = newPeeps.filter( oldPeep => oldPeep.master_id !== peep.id )
+        setLessonPeeps(filtered);
+    }
 
     const addPeepToLesson = (peep) => {
         let newPeeps = [...lessonPeeps];
@@ -130,7 +129,16 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
                 </RadioGroup>
                 <br/>
 
-                {peepTiles}
+                {
+                    lessonPeopleSorted.map( lessonPerson =>
+
+                        <PeepTile key={"l" + lesson.id + "m" + lessonPerson.id + "t"}
+                                  peep={getMasterPerson(lessonPerson.master_id)}
+                                  icon={lessonPerson.role === "STUDENT" ? athleteIcon : volunteerIcon}
+                                  onClick={peepClicked}
+                        />
+                    )
+                }
                 <Button onClick={handleToggle} variant="outlined" startIcon={<PersonAddIcon fontSize={'large'}/>}>Add
                     Person
                 </Button>
