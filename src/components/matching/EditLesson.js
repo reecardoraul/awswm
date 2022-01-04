@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Card, CardActionArea, CardContent, CardHeader, Typography} from "@mui/material";
+import {Card, CardContent, CardHeader, Paper, Typography} from "@mui/material";
 
 import PropTypes from "prop-types";
 
@@ -30,6 +30,7 @@ const athleteIcon = <DownhillSkiingIcon/>
 export default function EditLesson({lesson, lesson_master, peeps, onSave, onCancel}) {
     const [lessonPeeps, setLessonPeeps] = useState(lesson_master);
     const [peepSearchOpen, setPeepSearchOpen] = useState(false);
+    const [saved, setSaved] = useState()
 
     const handleClose = () => {
         setPeepSearchOpen(false);
@@ -47,8 +48,8 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
         },
         onSubmit: (values) => {
             values.people = lessonPeeps.map(peep => ({
-                    master_id: (peep.master_id ? peep.master_id : peep.id),
-                    role: peep.role
+                master_id: (peep.master_id ? peep.master_id : peep.id),
+                role: peep.role
             }));
             if (values.id === "") {
                 values.id = undefined;
@@ -71,13 +72,13 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
     });
     const athletes = lessonPeeps.filter(peep => peep.role.toLowerCase() === athlete);
 
-    const lessonPeopleSorted = [...athletes,...volunteers]
+    const lessonPeopleSorted = [...athletes, ...volunteers]
 
     const saveable = formik.values.ltype && formik.values.timeslot && lessonPeeps.length > 0;
 
     const peepClicked = (peep) => {
         let newPeeps = [...lessonPeeps];
-        let filtered = newPeeps.filter( oldPeep => oldPeep.master_id !== peep.id )
+        let filtered = newPeeps.filter(oldPeep => oldPeep.master_id !== peep.id)
         setLessonPeeps(filtered);
     }
 
@@ -89,18 +90,20 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
         setPeepSearchOpen(false);
     }
 
-    return <Card key={"editlessoncard_" + lesson.id} variant={"outlined"} style={{paddingBottom: "3px"}}>
+    return <Card variant={"outlined"} style={{paddingBottom: "3px"}}>
         <Modal
             open={peepSearchOpen}
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <MatchingPeepSearch
-                people={peeps}
-                setPeep={addPeepToLesson}
-                person_lesson={lesson_master}
-            />
+            <Paper>
+                <MatchingPeepSearch
+                    people={peeps}
+                    setPeep={addPeepToLesson}
+                    person_lesson={lesson_master}
+                />
+            </Paper>
         </Modal>
 
         <CardHeader title={title} style={{paddingBottom: "2px"}}/>
@@ -130,7 +133,7 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
                 <br/>
 
                 {
-                    lessonPeopleSorted.map( lessonPerson =>
+                    lessonPeopleSorted.map(lessonPerson =>
 
                         <PeepTile key={"l" + lesson.id + "m" + lessonPerson.id + "t"}
                                   peep={getMasterPerson(lessonPerson.master_id)}
@@ -157,9 +160,9 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
 }
 
 EditLesson.propTypes = {
-    lesson: PropTypes.object.isRequired,
-    lesson_master: PropTypes.object.isRequired,
-    peeps: PropTypes.object.isRequired,
+    lesson: PropTypes.object,
+    lesson_master: PropTypes.array.isRequired,
+    peeps: PropTypes.array.isRequired,
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired
 }

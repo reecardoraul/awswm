@@ -23,17 +23,6 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
         setNewLesson({timeslot: timeslot})
     }
 
-    const editView =
-            <EditLesson lesson={current_lesson}
-                        lesson_master={
-                            (current_lesson && current_lesson.id) ? lesson_master.filter(lm => lm.lesson_id === current_lesson.id)
-                                : []
-                        }
-                        peeps={peeps}
-                        onCancel={cancelNewLesson}
-                        onSave={newLessonSave}
-            />
-
     const style = {
         margin: 0,
         top: 45,
@@ -50,7 +39,16 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
             onClose={cancelNewLesson}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
-        >{editView}
+        >
+            <EditLesson lesson={current_lesson}
+                        lesson_master={
+                            (current_lesson && current_lesson.id) ? lesson_master.filter(lm => lm.lesson_id === current_lesson.id)
+                                : []
+                        }
+                        peeps={peeps}
+                        onCancel={cancelNewLesson}
+                        onSave={newLessonSave}
+            />
         </Modal>
         <Zoom
             style={style}
@@ -67,9 +65,10 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
         {
             lessons.filter(lesson => lesson.timeslot === timeslot).map(lesson =>
                 <CardActionArea
+                    key={"lessonMatching-" + lesson.id}
                     onClick={() => setNewLesson(lesson)}
                 >
-                    <LessonMatching key={"lessonMatching-" + lesson.id}
+                    <LessonMatching
                                     lesson={lesson}
                                     lesson_master={lesson_master.filter(lm => lm.lesson_id === lesson.id)}
                                     peeps={peeps}
@@ -82,10 +81,9 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
 }
 
 MatchingLessons.propTypes = {
-    timeslot: PropTypes.object.isRequired,
-    lessons: PropTypes.object.isRequired,
-    lesson_master: PropTypes.object.isRequired,
-    peeps: PropTypes.object.isRequired,
-    onSave: PropTypes.func.isRequired,
-    onAdd: PropTypes.func.isRequired
+    timeslot: PropTypes.string.isRequired,
+    lessons: PropTypes.array.isRequired,
+    lesson_master: PropTypes.array.isRequired,
+    peeps: PropTypes.array.isRequired,
+    onSave: PropTypes.func.isRequired
 }

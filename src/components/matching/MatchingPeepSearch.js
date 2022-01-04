@@ -7,11 +7,10 @@ import PersonIcon from '@mui/icons-material/Person';
 export default function MatchingPeepSearch({setPeep, season, timeslot, people, person_lesson}) {
     const personIcon = <PersonIcon/>
 
-    return <Paper>
-        <CardContent>
-            <PeepLister people={people} setPeep={setPeep} label="Add People" icon={personIcon}/>
-        </CardContent>
-    </Paper>
+    return <CardContent>
+        <PeepLister people={people} setPeep={setPeep} label="Add People" icon={personIcon}/>
+    </CardContent>
+
 }
 
 MatchingPeepSearch.propTypes = {

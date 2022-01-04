@@ -31,7 +31,7 @@ export default function LessonMatching({lesson, lesson_master, peeps}) {
 
     const subheader = [].concat(...athTiles, ...volTiles);
 
-   return <Card key={"lessoncard_" + lesson.id} variant={"outlined"} style={{paddingBottom:"3px"}}>
+   return <Card variant={"outlined"} style={{paddingBottom:"3px"}}>
         <CardHeader title={lesson.ltype} style={{paddingBottom:"2px"}}
         />
         <CardContent style={{padding:"5px"}}>
@@ -43,6 +43,6 @@ export default function LessonMatching({lesson, lesson_master, peeps}) {
 
 LessonMatching.propTypes = {
     lesson: PropTypes.object.isRequired,
-    lesson_master: PropTypes.object.isRequired,
-    peeps: PropTypes.object.isRequired
+    lesson_master: PropTypes.array.isRequired,
+    peeps: PropTypes.array.isRequired
 }
