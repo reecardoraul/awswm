@@ -29,7 +29,7 @@ export default function LessonMatching({lesson, lesson_master, peeps}) {
     const athTiles = athletes.map(peep => <PeepTile key={"l" + lesson.id + "m" + peep.id + "t"}
                                                     peep={getMasterPerson(peep.master_id)} icon={athleteIcon}/>);
 
-    const subheader = [].concat(...athTiles, ...volTiles);
+    const subheader = [...athTiles, ...volTiles];
 
    return <Card variant={"outlined"} style={{paddingBottom:"3px"}}>
         <CardHeader title={lesson.ltype} style={{paddingBottom:"2px"}}
