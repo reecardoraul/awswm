@@ -31,7 +31,7 @@ export default function LessonMatching({lesson, lesson_master, peeps}) {
 
     const subheader = [...athTiles, ...volTiles];
 
-   return <Card variant={"outlined"} style={{paddingBottom:"3px"}}>
+   return <Card variant={"outlined"}>
         <CardContent style={{padding:"5px"}}>
             <Typography variant='caption' sx={{fontSize: 24, padding: "2px"}} color="text.secondary" gutterBottom >{lesson.ltype} </Typography>
             {subheader}
