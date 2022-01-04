@@ -23,10 +23,10 @@ export default function LessonMatching({lesson, lesson_master, peeps}) {
 
     const athletes = lesson_master.filter(peep => peep.role === "STUDENT");
 
-    const volTiles = volunteers.map(peep => <PeepTile id={"l" + lesson.id + "m" + peep.id + "t"}
+    const volTiles = volunteers.map(peep => <PeepTile key={"l" + lesson.id + "m" + peep.id + "t"}
                                                       peep={getMasterPerson(peep.master_id)}
                                                       icon={volunteerIcon}/>);
-    const athTiles = athletes.map(peep => <PeepTile id={"l" + lesson.id + "m" + peep.id + "t"}
+    const athTiles = athletes.map(peep => <PeepTile key={"l" + lesson.id + "m" + peep.id + "t"}
                                                     peep={getMasterPerson(peep.master_id)} icon={athleteIcon}/>);
 
     const subheader = [].concat(...athTiles, ...volTiles);
