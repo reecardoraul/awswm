@@ -57,7 +57,7 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
         },
     })
 
-    const title = lesson.id ? lesson.ltype : "New Lesson";
+    const title = lesson.id ? "Edit Lesson" : "New Lesson";
 
     const getMasterPerson = (master_id) => {
         let retval = peeps.filter(person => person.id === master_id);
