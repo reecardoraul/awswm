@@ -8,6 +8,7 @@ import {useState} from "react";
 import EditLesson from "./EditLesson";
 import {CardActionArea, duration} from "@mui/material";
 import Modal from "@mui/material/Modal";
+import Dialog from "@mui/material/Dialog";
 
 export default function MatchingLessons({timeslot, lessons, lesson_master, peeps, onSave, onDelete}) {
     const [current_lesson, setNewLesson] = useState(null);
@@ -34,7 +35,8 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
     };
 
     return <div>
-        <Modal
+        <Dialog
+            fullScreen
             open={!!current_lesson}
             onClose={cancelNewLesson}
             aria-labelledby="modal-modal-title"
@@ -49,7 +51,7 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
                         onCancel={cancelNewLesson}
                         onSave={newLessonSave}
             />
-        </Modal>
+        </Dialog>
         <Zoom
             style={style}
             in={true}

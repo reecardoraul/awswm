@@ -40,10 +40,10 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
 
     const formik = useFormik({
         initialValues: {
-            id: lesson.id ? lesson.id : '',
-            ltype: lesson.ltype ? lesson.ltype : '',
-            timeslot: lesson.timeslot ? lesson.timeslot : '',
-            year: lesson.year ? lesson.year : ''
+            id: lesson && lesson.id ? lesson.id : '',
+            ltype: lesson && lesson.ltype ? lesson.ltype : '',
+            timeslot: lesson && lesson.timeslot ? lesson.timeslot : '',
+            year: lesson && lesson.year ? lesson.year : ''
         },
         onSubmit: (values) => {
             values.people = lessonPeeps.map(peep => ({
@@ -57,7 +57,7 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
         },
     })
 
-    const title = lesson.id ? "Edit Lesson" : "New Lesson";
+    const title = lesson && lesson.id ? "Edit Lesson" : "New Lesson";
 
     const getMasterPerson = (master_id) => {
         let retval = peeps.filter(person => person.id === master_id);
@@ -83,7 +83,7 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
 
     const addPeepToLesson = (peep) => {
         let newPeeps = [...lessonPeeps];
-        let newPeep = {"master_id": peep.id, "role": peep.role, "lesson_id": lesson.id};
+        let newPeep = {"master_id": peep.id, "role": peep.role, "lesson_id": lesson ? lesson.id : ""};
         newPeeps.push(newPeep);
         setLessonPeeps(newPeeps);
         setPeepSearchOpen(false);
@@ -113,12 +113,12 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
                 <RadioGroup aria-label="timeslot" name="timeslot"
                             value={formik.values.timeslot} onChange={formik.handleChange}
                             row={true} aria-required={true}>
-                    <FormControlLabel value="TUE" control={<Radio/>} label="Tuesday"/>
-                    <FormControlLabel value="WED" control={<Radio/>} label="Wednesday"/>
-                    <FormControlLabel value="THU" control={<Radio/>} label="Thursday"/>
-                    <FormControlLabel value="SUN1" control={<Radio/>} label="Sunday 1"/>
-                    <FormControlLabel value="SUN2" control={<Radio/>} label="Sunday 2"/>
-                    <FormControlLabel value="SUN3" control={<Radio/>} label="Sunday 3"/>
+                    <FormControlLabel value="TUE" control={<Radio/>} label="Tue"/>
+                    <FormControlLabel value="WED" control={<Radio/>} label="Wed"/>
+                    <FormControlLabel value="THU" control={<Radio/>} label="Thu"/>
+                    <FormControlLabel value="SUN1" control={<Radio/>} label="Sun1"/>
+                    <FormControlLabel value="SUN2" control={<Radio/>} label="Sun2"/>
+                    <FormControlLabel value="SUN3" control={<Radio/>} label="Sun3"/>
                 </RadioGroup>
                 <br/>
                 <Typography sx={{fontSize: 18}} color="text.secondary">Lesson Type</Typography>
@@ -126,7 +126,7 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
                             value={formik.values.ltype} onChange={formik.handleChange}
                             row={true} aria-required={"true"}>
                     <FormControlLabel value="BI" control={<Radio/>} label="Bi-Ski"/>
-                    <FormControlLabel value="MONO" control={<Radio/>} label="Moni-Ski"/>
+                    <FormControlLabel value="MONO" control={<Radio/>} label="Mono-Ski"/>
                     <FormControlLabel value="STANDUP" control={<Radio/>} label="Standup"/>
                 </RadioGroup>
                 <br/>
@@ -134,7 +134,7 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
                 {
                     lessonPeopleSorted.map(lessonPerson =>
 
-                        <PeepTileClick key={"l" + lesson.id + "m" + lessonPerson.id + "t"}
+                        <PeepTileClick key={"l" + (lesson ? lesson.id : "") + "m" + lessonPerson.id + "t"}
                                   peep={getMasterPerson(lessonPerson.master_id)}
                                   icon={lessonPerson.role === "STUDENT" ? athleteIcon : volunteerIcon}
                                   onClick={peepClicked}
