@@ -66,6 +66,7 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
         {
             lessons.filter(lesson => lesson.timeslot === timeslot).map(lesson =>
                 <CardActionArea
+                    style={{paddingBottom: "2px"}}
                     key={"lessonMatching-" + lesson.id}
                     onClick={() => setNewLesson(lesson)}
                 >
