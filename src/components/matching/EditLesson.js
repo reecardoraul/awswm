@@ -3,7 +3,6 @@ import {Card, CardContent, CardHeader, Paper, Typography} from "@mui/material";
 
 import PropTypes from "prop-types";
 
-import PeepTile from "./PeepTile";
 import CardActions from "@mui/material/CardActions";
 
 import RadioGroup from "@mui/material/RadioGroup";
@@ -20,6 +19,7 @@ import DownhillSkiingIcon from '@mui/icons-material/DownhillSkiing';
 import MatchingPeepSearch from "./MatchingPeepSearch";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
+import PeepTileClick from "./PeepTileClick";
 
 const volunteer = "volunteer";
 const coordinator = "coordinator";
@@ -30,7 +30,6 @@ const athleteIcon = <DownhillSkiingIcon/>
 export default function EditLesson({lesson, lesson_master, peeps, onSave, onCancel}) {
     const [lessonPeeps, setLessonPeeps] = useState(lesson_master);
     const [peepSearchOpen, setPeepSearchOpen] = useState(false);
-    const [saved, setSaved] = useState()
 
     const handleClose = () => {
         setPeepSearchOpen(false);
@@ -135,7 +134,7 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
                 {
                     lessonPeopleSorted.map(lessonPerson =>
 
-                        <PeepTile key={"l" + lesson.id + "m" + lessonPerson.id + "t"}
+                        <PeepTileClick key={"l" + lesson.id + "m" + lessonPerson.id + "t"}
                                   peep={getMasterPerson(lessonPerson.master_id)}
                                   icon={lessonPerson.role === "STUDENT" ? athleteIcon : volunteerIcon}
                                   onClick={peepClicked}

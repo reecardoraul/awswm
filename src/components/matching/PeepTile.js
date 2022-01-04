@@ -5,18 +5,9 @@ import Paper from "@mui/material/Paper";
 import CardHeader from "@mui/material/CardHeader";
 import CardActionArea from "@mui/material/CardActionArea";
 
-export default function PeepTile({peep, icon, onClick}) {
-
-    const safeClick = (peep) => {
-        if( onClick ){
-            onClick(peep)
-        }
-    }
+export default function PeepTile({peep, icon}) {
 
     return <Paper variant="outlined" style={{display: "inline-block", margin: "3px"}}>
-        <CardActionArea
-            onClick={ () => safeClick(peep) }
-        >
         <CardHeader
             avatar={<Avatar>{icon}</Avatar>}
             title={
@@ -25,7 +16,6 @@ export default function PeepTile({peep, icon, onClick}) {
                 </Typography>
             }
         />
-        </CardActionArea>
     </Paper>
 }
 
