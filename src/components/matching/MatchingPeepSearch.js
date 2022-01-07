@@ -22,7 +22,7 @@ export default function MatchingPeepSearch({setPeep, season, timeslot, yearInfo,
             return p.sunday2;
         if( timeslot === "SUN3" )
             return p.sunday3;
-        return false;
+        return true;
     } );
 
     const people = timeslot_peeps;
