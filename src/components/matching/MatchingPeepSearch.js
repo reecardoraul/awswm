@@ -7,6 +7,10 @@ import PersonIcon from '@mui/icons-material/Person';
 export default function MatchingPeepSearch({setPeep, season, timeslot, people, person_lesson}) {
     const personIcon = <PersonIcon/>
 
+    const matched = person_lesson.map( pl => pl.master_id );
+
+    const timeslot_peeps =  person_lesson.filter( pl => pl.master_id );
+
     return <CardContent>
         <PeepLister people={people} setPeep={setPeep} label="Add People" icon={personIcon}/>
     </CardContent>

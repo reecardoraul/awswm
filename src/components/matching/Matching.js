@@ -139,45 +139,33 @@ export default function BasicTabs() {
                 <MatchingLessons
                     timeslot="TUE"
                     onSave={onSave}
-                    lesson_master={yearInfo.lesson_master}
-                    peeps={yearInfo.people}
-                    lessons={yearInfo.lessons.filter(lesson => lesson.timeslot === "TUE")}
+                    yearInfo={yearInfo}
                 />
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <MatchingLessons timeslot="WED" onSave={onSave}
-                                 lesson_master={yearInfo.lesson_master}
-                                 peeps={yearInfo.people}
-                                 lessons={yearInfo.lessons}
+                                 yearInfo={yearInfo}
                 />
             </TabPanel>
             <TabPanel value={value} index={2}>
                 <MatchingLessons timeslot="THU" onSave={onSave}
-                                 lesson_master={yearInfo.lesson_master}
-                                 peeps={yearInfo.people}
-                                 lessons={yearInfo.lessons}
+                                 yearInfo={yearInfo}
                 />
             </TabPanel>
             <TabPanel value={value} index={3}>
                 <MatchingLessons timeslot="SUN1"
                                  onSave={onSave}
-                                 lesson_master={yearInfo.lesson_master}
-                                 peeps={yearInfo.people}
-                                 lessons={yearInfo.lessons}
+                                 yearInfo={yearInfo}
                 />
             </TabPanel>
             <TabPanel value={value} index={4}>
                 <MatchingLessons timeslot="SUN2" onSave={onSave}
-                                 lesson_master={yearInfo.lesson_master}
-                                 peeps={yearInfo.people}
-                                 lessons={yearInfo.lessons}
+                                 yearInfo={yearInfo}
                 />
             </TabPanel>
             <TabPanel value={value} index={5}>
                 <MatchingLessons timeslot="SUN3" onSave={onSave}
-                                 lesson_master={yearInfo.lesson_master}
-                                 peeps={yearInfo.people}
-                                 lessons={yearInfo.lessons.filter(lesson => lesson.timeslot === "SUN3")}
+                                 yearInfo={yearInfo}
                 />
             </TabPanel>
         </Box>

@@ -9,7 +9,7 @@ import EditLesson from "./EditLesson";
 import {CardActionArea, duration} from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 
-export default function MatchingLessons({timeslot, lessons, lesson_master, peeps, onSave, onDelete}) {
+export default function MatchingLessons({timeslot, yearInfo, onSave, onDelete}) {
     const [current_lesson, setNewLesson] = useState(null);
 
     const cancelNewLesson = () => {
@@ -43,10 +43,10 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
         >
             <EditLesson lesson={current_lesson}
                         lesson_master={
-                            (current_lesson && current_lesson.id) ? lesson_master.filter(lm => lm.lesson_id === current_lesson.id)
+                            (current_lesson && current_lesson.id) ? yearInfo.lesson_master.filter(lm => lm.lesson_id === current_lesson.id)
                                 : []
                         }
-                        peeps={peeps}
+                        yearInfo={yearInfo}
                         onCancel={cancelNewLesson}
                         onSave={newLessonSave}
             />
@@ -64,17 +64,16 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
         </Zoom>
 
         {
-            lessons.filter(lesson => lesson.timeslot === timeslot).map(lesson =>
+            yearInfo.lessons.filter(lesson => lesson.timeslot === timeslot).map(lesson =>
                 <CardActionArea
                     style={{paddingBottom: "2px"}}
                     key={"lessonMatching-" + lesson.id}
                     onClick={() => setNewLesson(lesson)}
                 >
                     <LessonMatching
-                                    lesson={lesson}
-                                    lesson_master={lesson_master.filter(lm => lm.lesson_id === lesson.id)}
-                                    peeps={peeps}
-                                    onDelete={onDelete}
+                        lesson={lesson}
+                        yearInfo={yearInfo}
+                        onDelete={onDelete}
                     />
                 </CardActionArea>
             )
@@ -84,8 +83,6 @@ export default function MatchingLessons({timeslot, lessons, lesson_master, peeps
 
 MatchingLessons.propTypes = {
     timeslot: PropTypes.string.isRequired,
-    lessons: PropTypes.array.isRequired,
-    lesson_master: PropTypes.array.isRequired,
-    peeps: PropTypes.array.isRequired,
+    yearInfo: PropTypes.object.isRequired,
     onSave: PropTypes.func.isRequired
 }

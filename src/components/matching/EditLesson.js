@@ -14,8 +14,6 @@ import IconButton from "@mui/material/IconButton";
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
-import DownhillSkiingIcon from '@mui/icons-material/DownhillSkiing';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MatchingPeepSearch from "./MatchingPeepSearch";
 import Modal from "@mui/material/Modal";
@@ -25,10 +23,11 @@ import PeepTileClick from "./PeepTileClick";
 const volunteer = "volunteer";
 const coordinator = "coordinator";
 const athlete = "student";
-const volunteerIcon = <VolunteerActivismIcon/>
-const athleteIcon = <DownhillSkiingIcon/>
 
-export default function EditLesson({lesson, lesson_master, peeps, onSave, onCancel}) {
+export default function EditLesson({lesson, yearInfo, onSave, onCancel}) {
+    const lesson_master =
+        (lesson && lesson.id) ? yearInfo.lesson_master.filter(lm => lm.lesson_id === lesson.id)
+            : [];
     const [lessonPeeps, setLessonPeeps] = useState(lesson_master);
     const [peepSearchOpen, setPeepSearchOpen] = useState(false);
 
@@ -61,7 +60,7 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
     const title = lesson && lesson.id ? "Edit Lesson" : "New Lesson";
 
     const getMasterPerson = (master_id) => {
-        let retval = peeps.filter(person => person.id === master_id);
+        let retval = yearInfo.people.filter(person => person.id === master_id);
 
         if (retval.length === 1)
             return retval[0];
@@ -108,7 +107,7 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
         >
             <Paper>
                 <MatchingPeepSearch
-                    people={peeps}
+                    people={yearInfo.people}
                     setPeep={addPeepToLesson}
                     person_lesson={lesson_master}
                 />
@@ -149,8 +148,8 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
                     lessonPeopleSorted.map(lessonPerson =>
 
                         <PeepTileClick key={"l" + (lesson ? lesson.id : "") + "m" + lessonPerson.id + "t"}
-                                  peep={getMasterPerson(lessonPerson.master_id)}
-                                  onClick={peepClicked}
+                                       peep={getMasterPerson(lessonPerson.master_id)}
+                                       onClick={peepClicked}
                         />
                     )
                 }
@@ -161,7 +160,7 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
             </CardContent>
             <CardActions disableSpacing style={{width: '98%', justifyContent: 'flex-end'}}>
                 <IconButton>
-                    <DeleteIcon  fontSize={'large'}/>
+                    <DeleteIcon fontSize={'large'}/>
                 </IconButton>
                 <IconButton disabled={!saveable} type={"submit"}>
                     <SaveIcon color={saveable ? "primary" : "disabled"} fontSize={'large'}/>
@@ -173,8 +172,7 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
 
 EditLesson.propTypes = {
     lesson: PropTypes.object,
-    lesson_master: PropTypes.array.isRequired,
-    peeps: PropTypes.array.isRequired,
+    yearInfo: PropTypes.object.isRequired,
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired
 }

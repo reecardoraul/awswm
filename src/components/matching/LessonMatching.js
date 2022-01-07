@@ -2,15 +2,12 @@ import React from 'react';
 import {Card, CardContent, CardHeader, Typography} from "@mui/material";
 
 import PropTypes from "prop-types";
-import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
-import DownhillSkiingIcon from '@mui/icons-material/DownhillSkiing';
 import PeepTile from "./PeepTile";
 
-export default function LessonMatching({lesson, lesson_master, peeps}) {
+export default function LessonMatching({lesson, yearInfo}) {
+    const peeps = yearInfo.people;
+    const lesson_master = yearInfo.lesson_master.filter(lm => lm.lesson_id === lesson.id)
     const volunteers = lesson_master.filter(peep => peep.role === "VOLUNTEER");
-
-    let volunteerIcon = <VolunteerActivismIcon/>;
-    let athleteIcon = <DownhillSkiingIcon/>;
 
     const getMasterPerson = (master_id) => {
         let retval = peeps.filter(person => person.id === master_id);
@@ -40,7 +37,6 @@ export default function LessonMatching({lesson, lesson_master, peeps}) {
 }
 
 LessonMatching.propTypes = {
-    lesson: PropTypes.object.isRequired,
-    lesson_master: PropTypes.array.isRequired,
+    yearInfo: PropTypes.object.isRequired,
     peeps: PropTypes.array.isRequired
 }
