@@ -75,6 +75,8 @@ export default function EditLesson({lesson, yearInfo, onSave, onCancel}) {
 
     const saveable = formik.values.ltype && formik.values.timeslot && lessonPeeps.length > 0;
 
+    const addTimeslot = formik.values.timeslot ? formik.values.timeslot : lesson ?  lesson.timeslot : "TUE"
+
     const peepClicked = (peep) => {
         let newPeeps = [...lessonPeeps];
         let filtered = newPeeps.filter(oldPeep => oldPeep.master_id !== peep.id)
@@ -107,9 +109,10 @@ export default function EditLesson({lesson, yearInfo, onSave, onCancel}) {
         >
             <Paper>
                 <MatchingPeepSearch
-                    people={yearInfo.people}
+                    yearInfo={yearInfo}
                     setPeep={addPeepToLesson}
                     person_lesson={lesson_master}
+                    timeslot={addTimeslot}
                 />
             </Paper>
         </Modal>

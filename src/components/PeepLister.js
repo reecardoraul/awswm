@@ -43,14 +43,14 @@ export default function PeepLister({setPeep, nextPath, fetchUrl, icon, label, pe
     const history = useHistory();
 
     useEffect( () => {
-        if( peeps && peeps.length === 0 )
+        if( peeps && peeps.length === 0 && fetchUrl)
             setPeeps(dispatch, set_peeps, fetchUrl)
     },[fetchUrl,peeps]);
 
     const handleClick = (vol) => {
         setPeep(vol);
         if (nextPath) {
-            history.push(nextPath);
+        history.push(nextPath);
         }
     }
 
