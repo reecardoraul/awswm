@@ -16,6 +16,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import DownhillSkiingIcon from '@mui/icons-material/DownhillSkiing';
+import DeleteIcon from '@mui/icons-material/Delete';
 import MatchingPeepSearch from "./MatchingPeepSearch";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
@@ -89,6 +90,15 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
         setPeepSearchOpen(false);
     }
 
+    const topRight = {
+        margin: 0,
+        top: 3,
+        right: 3,
+        bottom: 'auto',
+        left: 'auto',
+        position: 'absolute',
+    };
+
     return <Card variant={"outlined"} style={{paddingBottom: "3px"}}>
         <Modal
             open={peepSearchOpen}
@@ -108,6 +118,9 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
         <CardHeader title={title} style={{paddingBottom: "2px"}}/>
         <form onSubmit={formik.handleSubmit}>
             <CardContent>
+                <IconButton style={topRight} onClick={onCancel}>
+                    <CancelIcon color={"action"} fontSize={'large'}/>
+                </IconButton>
 
                 <Typography sx={{fontSize: 18}} color="text.secondary">Timeslot</Typography>
                 <RadioGroup aria-label="timeslot" name="timeslot"
@@ -128,6 +141,7 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
                     <FormControlLabel value="BI" control={<Radio/>} label="Bi-Ski"/>
                     <FormControlLabel value="MONO" control={<Radio/>} label="Mono-Ski"/>
                     <FormControlLabel value="STANDUP" control={<Radio/>} label="Standup"/>
+                    <FormControlLabel value="FLOAT" control={<Radio/>} label="Float"/>
                 </RadioGroup>
                 <br/>
 
@@ -136,7 +150,6 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
 
                         <PeepTileClick key={"l" + (lesson ? lesson.id : "") + "m" + lessonPerson.id + "t"}
                                   peep={getMasterPerson(lessonPerson.master_id)}
-                                  icon={lessonPerson.role === "STUDENT" ? athleteIcon : volunteerIcon}
                                   onClick={peepClicked}
                         />
                     )
@@ -147,8 +160,8 @@ export default function EditLesson({lesson, lesson_master, peeps, onSave, onCanc
 
             </CardContent>
             <CardActions disableSpacing style={{width: '98%', justifyContent: 'flex-end'}}>
-                <IconButton onClick={onCancel}>
-                    <CancelIcon color={"action"} fontSize={'large'}/>
+                <IconButton>
+                    <DeleteIcon  fontSize={'large'}/>
                 </IconButton>
                 <IconButton disabled={!saveable} type={"submit"}>
                     <SaveIcon color={saveable ? "primary" : "disabled"} fontSize={'large'}/>
